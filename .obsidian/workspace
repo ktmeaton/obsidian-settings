@@ -1,0 +1,186 @@
+{
+  "main": {
+    "id": "35dba11e4a7ae7f2",
+    "type": "split",
+    "children": [
+      {
+        "id": "f00589cba8131b6a",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "scratch/2021-04-02 Scratch.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "951bcc5230aa7e72",
+    "type": "split",
+    "children": [
+      {
+        "id": "6059501da97b004a",
+        "type": "tabs",
+        "dimension": 35.15342960288809,
+        "children": [
+          {
+            "id": "9c5aa3c339a1895b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#Migration",
+                "matchingCase": false,
+                "explainSearch": true,
+                "collapseAll": false,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "ab74201e4c495000",
+        "type": "tabs",
+        "dimension": 35.15342960288809,
+        "children": [
+          {
+            "id": "fa1de0c65b907b01",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "scratch/2021-04-02 Scratch.md"
+              }
+            }
+          },
+          {
+            "id": "b342f914b30e0b55",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "fde9fc2579baeace",
+        "type": "tabs",
+        "dimension": 29.693140794223826,
+        "children": [
+          {
+            "id": "36f4026e5d10d540",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "31956f30c84ad9fb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "scratch/2021-03-23 Scratch.md",
+                "mode": "source"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 346
+  },
+  "right": {
+    "id": "279b08d31ac70634",
+    "type": "split",
+    "children": [
+      {
+        "id": "05263ac68b692dab",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6ac414474be083f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "scratch/2021-04-02 Scratch.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "80313538bb4794c4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "a269e1beb77c506a",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "8cbfeff68471d634",
+            "type": "leaf",
+            "state": {
+              "type": "timeline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "f1bc247fbefc77bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fec52db6ee8a7ffe",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 505
+  },
+  "lastOpenFiles": [
+    "scratch/2021-04-02 Scratch.md",
+    "pandoc/templates/Eisvogel/examples/beamer/beamer.md",
+    "Phylogeography.md",
+    "scratch/2021-03-23 Scratch.md",
+    "literature/Spyrou et al. 2018 Analysis 3800-Year-Old Yersinia.md",
+    "2021-03-23 Poinar Lab Meeting.md",
+    "scratch/2021-03-22 Scratch.md",
+    "continuous trait.md",
+    "discrete trait.md",
+    "literature/Rascovan et al. 2019 Emergence Spread Basal.md"
+  ]
+}
