@@ -2,16 +2,32 @@
 
 My favorite obsidian settings.
 
-## Usage
+## Install
 
-1. Clone the repository.
+1. Navigate to your obsidian vault.
 
 	```bash
-	git clone https://github.com/ktmeaton/obsidian-settings
+	cd /path/to/obsidian/vault
 	```
 
-1. Copy the ```.obsidian``` folder into a new vault.
+1. Add the settings repository as a submodule to your vault.
 
 	```bash
-	cp -r obsidian-settings/.obsidian/ obsidian-vault/
+	git submodule add https://github.com/ktmeaton/obsidian-settings .obsidian/
+	```
+
+## Update
+
+1. Check for updates.
+
+	```bash
+	cd /path/to/obsidian/vault/.obsidian
+	git fetch    
+	git diff ...origin
+	```
+
+2. Pull updates.
+
+	```bash
+	git pull
 	```
