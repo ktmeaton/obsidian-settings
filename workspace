@@ -4,13 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "f00589cba8131b6a",
+        "id": "127659fe3efd1201",
         "type": "leaf",
-        "active": true,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "scratch/2021-04-02 Scratch.md",
+            "file": "tasks/Build a New TimeTree.md",
             "mode": "source"
           }
         }
@@ -33,7 +32,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Migration",
+                "query": "iframe",
                 "matchingCase": false,
                 "explainSearch": true,
                 "collapseAll": false,
@@ -55,7 +54,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "scratch/2021-04-02 Scratch.md"
+                "file": "tasks/Build a New TimeTree.md"
               }
             }
           },
@@ -98,7 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 346
+    "width": 646
   },
   "right": {
     "id": "279b08d31ac70634",
@@ -114,10 +113,12 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "scratch/2021-04-02 Scratch.md",
+                "file": "tasks/Build a New TimeTree.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": false
               }
@@ -169,18 +170,20 @@
       }
     ],
     "direction": "horizontal",
-    "width": 505
+    "width": 505,
+    "collapsed": true
   },
+  "active": "127659fe3efd1201",
   "lastOpenFiles": [
-    "scratch/2021-04-02 Scratch.md",
-    "pandoc/templates/Eisvogel/examples/beamer/beamer.md",
-    "Phylogeography.md",
-    "scratch/2021-03-23 Scratch.md",
-    "literature/Spyrou et al. 2018 Analysis 3800-Year-Old Yersinia.md",
-    "2021-03-23 Poinar Lab Meeting.md",
-    "scratch/2021-03-22 Scratch.md",
-    "continuous trait.md",
-    "discrete trait.md",
-    "literature/Rascovan et al. 2019 Emergence Spread Basal.md"
+    "tasks/Build a New TimeTree.md",
+    "snakemake.md",
+    "tasks/Evaluate Singleton Sites.md",
+    "journal/2021-04-13.md",
+    "journal/2021-04-14.md",
+    "Construct New Datasets.md",
+    "tasks/Verify Dates.md",
+    "scratch/2021-04-07 Scratch.md",
+    "journal/2021-04-16.md",
+    "@Sebastian Duchene.md"
   ]
 }
