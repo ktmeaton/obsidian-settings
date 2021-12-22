@@ -24,9 +24,3 @@ aliases:
 
 ---
 ## Conclusions
-
-
-
----
-
-tags: [[Experiment]], #📝/🌱

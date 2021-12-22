@@ -32,5 +32,14 @@
       ],
       "key": "C"
     }
-  ]
+  ],
+  "editor:toggle-source": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "W"
+    }
+  ],
+  "workspace:close": []
 }

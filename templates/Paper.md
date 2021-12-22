@@ -10,7 +10,7 @@ authors:
 aliases:
   - {{title}}
 tags:
-  - 📝/🌿
+  - 📝
 status: idea
 type: [[Paper]]
 lang: en-US

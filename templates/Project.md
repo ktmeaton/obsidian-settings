@@ -1,10 +1,10 @@
 ---
-type: [ [ Project ] ]
-title: { ? { title } }
+type: [[Project]]
+title: {{title}}
 tags:
   - 📋
 status: idea
-people: null
+people:
 ---
 
 # {{title}}

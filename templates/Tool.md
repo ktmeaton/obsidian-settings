@@ -2,7 +2,7 @@
 title: {{title}}
 type: [[Tool]]
 tags:
-  - 📝/🌱
+  - 📝
 ---
 
 # {{title}}

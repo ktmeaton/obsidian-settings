@@ -1,14 +1,14 @@
 ---
 aliases:
-  - {{title}}
+  - { ? { title } }
   - '@{{title}}'
-type: [[Literature]]
-tags: 
-  - 📥/📰
-  - 📝/🌱  
-due:
+type: [ [ Literature ] ]
+tags:
+  - 📰
+  - 📝
+due: null
 status: idea
-project:
+project: null
 ---
 
 # {{title}}

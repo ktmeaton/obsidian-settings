@@ -1,12 +1,12 @@
 ---
 aliases:
-  - {{title}}
-tags: 
-  - 📥/📽
-  - 📝/🌱 
-title: {{title}}
-year: {{date}}
-channel:
+  - { ? { title } }
+tags:
+  - 📽
+  - 📝
+title: { ? { title } }
+year: { ? { date } }
+channel: null
 ---
 
 # {{title}}

@@ -19,7 +19,7 @@ progress: true
 slideNumber: true
 slideLevel: 3
 tags:
-  - 📝/🌱
+  - 📝
   - 🧨
 status: priority
 type: [ [ Slides ] ]
