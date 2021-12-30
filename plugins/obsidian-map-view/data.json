@@ -23,7 +23,7 @@
     }
   ],
   "zoomOnGoFromNote": 15,
-  "tilesUrl": "http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+  "tilesUrl": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   "autoZoom": true,
   "markerClickBehavior": "samePane",
   "newNoteNameFormat": "Location added on {{date:YYYY-MM-DD}}T{{date:HH-mm}}",
