@@ -45,9 +45,27 @@
   "obsidian-enhancing-mindmap:Toggle to markdown or mindmap": [
     {
       "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "M"
+    }
+  ],
+  "obsidian-map-view:open-map-view": [
+    {
+      "modifiers": [
         "Mod"
       ],
       "key": "M"
+    }
+  ],
+  "obsidian-map-view:insert-geolink": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "G"
     }
   ]
 }
