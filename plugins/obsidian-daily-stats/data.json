@@ -1,439 +1,200 @@
 {
   "dayCounts": {
-    "2022/0/5": 1897
+    "2022/0/5": 1897,
+    "2022/0/6": 577
   },
   "todaysWordCount": {
-    "obsidian-public/academic/Obsidian.md": {
-      "initial": 218,
-      "current": 217
-    },
-    "2022-01-04.md": {
-      "initial": 127,
-      "current": 127
-    },
-    "2022-01-05.md": {
+    "2022-01-06.md": {
       "initial": 41,
-      "current": 49
+      "current": 41
     },
-    "Meet with Natalie.md": {
-      "initial": 790,
-      "current": 1209
+    "Kanban.md": {
+      "initial": 229,
+      "current": 240
     },
-    "Do I need to submit timesheets.md": {
-      "initial": 45,
-      "current": 38
-    },
-    "Chanchal Yadav.md": {
-      "initial": 31,
-      "current": 32
-    },
-    "OneNote.md": {
-      "initial": 0,
-      "current": 140
-    },
-    "Workstation Setup.md": {
-      "initial": 33,
-      "current": 33
-    },
-    "Science Workstation.md": {
-      "initial": 33,
-      "current": 33
-    },
-    "surveilleR.md": {
-      "initial": 304,
-      "current": 304
-    },
-    "Privacy Basics and Privacy Impact Assessments.md": {
-      "initial": 29,
-      "current": 33
-    },
-    "Fundamentals of Information Management.md": {
-      "initial": 25,
-      "current": 29
-    },
-    "Harassment and Violence Prevention for Employees.md": {
-      "initial": 30,
-      "current": 34
-    },
-    "Indigneous Learning Series.md": {
-      "initial": 24,
-      "current": 24
-    },
-    "NML Training.md": {
-      "initial": 306,
-      "current": 418
-    },
-    "Indigenous Learning Series.md": {
-      "initial": 22,
-      "current": 26
-    },
-    "Indigineous Learning Series.md": {
-      "initial": 24,
-      "current": 24
-    },
-    "New Employee Orientation.md": {
-      "initial": 18,
-      "current": 27
-    },
-    "PMP Account.md": {
-      "initial": 10,
-      "current": 69
-    },
-    "Book Time Off.md": {
-      "initial": 18,
-      "current": 24
-    },
-    "PeopleSoft.md": {
-      "initial": 13,
-      "current": 13
-    },
-    "Register for Health and Dental Benefits.md": {
-      "initial": 24,
-      "current": 32
-    },
-    "CNPHI.md": {
-      "initial": 15,
-      "current": 112
-    },
-    "CDC Genomic Epi Workshop.md": {
-      "initial": 24,
-      "current": 26
-    },
-    "R Training.md": {
-      "initial": 16,
-      "current": 20
-    },
-    "RDP and Remote Machines.md": {
-      "initial": 20,
-      "current": 29
-    },
-    "LIMNS Training.md": {
-      "initial": 16,
-      "current": 25
-    },
-    "Data Processing Shadow.md": {
-      "initial": 22,
-      "current": 37
-    },
-    "Provincial Rreport Generation.md": {
-      "initial": 18,
-      "current": 20
-    },
-    "Provincial Report Generation.md": {
-      "initial": 20,
-      "current": 21
+    "Writing Bootcamp Lunch.md": {
+      "initial": 28,
+      "current": 36
     },
     "Metadata Training.md": {
-      "initial": 22,
-      "current": 66
-    },
-    "Border Porosity Analysis.md": {
-      "initial": 16,
-      "current": 27
-    },
-    "NML Bioinformatics Lab Meeting Presentation.md": {
-      "initial": 148,
-      "current": 27
-    },
-    "obsidian-public/academic/PhD Defense.md": {
-      "initial": 17,
-      "current": 20
-    },
-    "PhD Defense Presentation.md": {
-      "initial": 12,
-      "current": 12
-    },
-    "templates/Note.md": {
-      "initial": 8,
-      "current": 8
-    },
-    "Library Proxy.md": {
-      "initial": 10,
-      "current": 20
-    },
-    "Mandatory Training.md": {
-      "initial": 10,
+      "initial": 66,
       "current": 64
     },
-    "Conflict Of Interest Declaration Form.md": {
-      "initial": 22,
-      "current": 28
-    },
-    "Health and Dental Benefits.md": {
-      "initial": 28,
-      "current": 56
-    },
-    "Bioinformatics Lab Page.md": {
-      "initial": 12,
-      "current": 28
-    },
-    "Microsoft Teams.md": {
-      "initial": 35,
-      "current": 34
-    },
-    "Webex.md": {
-      "initial": 13,
-      "current": 13
-    },
-    "How to submit overtime.md": {
-      "initial": 14,
-      "current": 25
-    },
-    "Science Network.md": {
-      "initial": 1,
-      "current": 15
-    },
-    "RDP, Remote Machines, Azure Data Studio.md": {
-      "initial": 31,
-      "current": 32
-    },
-    "Moodle.md": {
-      "initial": 14,
-      "current": 89
-    },
-    "Conda Workshop.md": {
-      "initial": 46,
-      "current": 46
-    },
-    "Conda and Slurm Workshop.md": {
-      "initial": 48,
-      "current": 54
-    },
-    "Bioinformatics 101.md": {
-      "initial": 20,
-      "current": 22
-    },
-    "Bioinformatics 102.md": {
-      "initial": 20,
-      "current": 22
-    },
-    "Bioinformatics 103.md": {
-      "initial": 20,
-      "current": 22
-    },
-    "Introduction to IRIDA.md": {
-      "initial": 22,
-      "current": 24
-    },
-    "CDC Genomic Epidemiology.md": {
-      "initial": 24,
-      "current": 37
-    },
-    "Command-Line.md": {
-      "initial": 20,
-      "current": 28
-    },
-    "Command-Line Wizardy.md": {
-      "initial": 30,
-      "current": 30
-    },
-    "NML Pages.md": {
-      "initial": 16,
-      "current": 23
-    },
-    "NML Bioinformatics Lab Meeting.md": {
-      "initial": 448,
-      "current": 451
-    },
-    "Hub.md": {
-      "initial": 14,
-      "current": 19
-    },
-    "CanCOGeN.md": {
-      "initial": 264,
-      "current": 275
-    },
-    "NextCloud.md": {
-      "initial": 8,
-      "current": 13
-    },
-    "NextCloud Share.md": {
-      "initial": 14,
-      "current": 42
-    },
-    "Waffles.md": {
-      "initial": 47,
-      "current": 52
-    },
-    "Science Network Drives.md": {
-      "initial": 63,
-      "current": 105
-    },
-    "Jupyter Server.md": {
-      "initial": 16,
-      "current": 23
-    },
-    "Rstudio Server.md": {
-      "initial": 16,
-      "current": 24
-    },
-    "Visual Studio Code.md": {
-      "initial": 1,
-      "current": 54
+    "obsidian-public/academic/Update Personal Website.md": {
+      "initial": 18,
+      "current": 18
     },
     "Python Tutorial.md": {
-      "initial": 20,
-      "current": 27
+      "initial": 28,
+      "current": 28
     },
-    "GitLab.md": {
-      "initial": 14,
-      "current": 20
+    "NML Bioinformatics Lab Meeting.md": {
+      "initial": 452,
+      "current": 453
     },
-    "csvtk.md": {
-      "initial": 14,
-      "current": 14
+    "obsidian-public/academic/Pla Depletion Figure.md": {
+      "initial": 136,
+      "current": 138
     },
-    "seqkit.md": {
-      "initial": 14,
-      "current": 16
+    "obsidian-public/academic/Pipeline Update v0.1.2.md": {
+      "initial": 364,
+      "current": 366
     },
-    "NML SARS-CoV-2 Resources.md": {
-      "initial": 22,
-      "current": 32
+    "obsidian-public/academic/Archive PhD Papers.md": {
+      "initial": 49,
+      "current": 49
     },
-    "Canadian VirusSeq Data Portal.md": {
-      "initial": 78,
-      "current": 88
+    "Pango Designation.md": {
+      "initial": 36,
+      "current": 38
     },
-    "CanCOGeN VirusSeq Data Portal.md": {
-      "initial": 88,
-      "current": 88
+    "Living Evidence SARS-CoV-2 Variants.md": {
+      "initial": 42,
+      "current": 43
     },
-    "GISAID.md": {
+    "VOC VUI Monitoring.md": {
+      "initial": 122,
+      "current": 125
+    },
+    "Rstudio Server.md": {
       "initial": 25,
       "current": 25
     },
-    "Power BI.md": {
+    "PANGO Network.md": {
+      "initial": 36,
+      "current": 36
+    },
+    "Visual Studio Code.md": {
+      "initial": 54,
+      "current": 54
+    },
+    "obsidian-public/academic/PhD Defense.md": {
+      "initial": 20,
+      "current": 22
+    },
+    "NextCloud Share.md": {
+      "initial": 42,
+      "current": 42
+    },
+    "obsidian-public/academic/Black Death Paper Map.md": {
+      "initial": 25,
+      "current": 25
+    },
+    "CanCOGeN Meetings.md": {
+      "initial": 165,
+      "current": 161
+    },
+    "Meet with Emily.md": {
+      "initial": 36,
+      "current": 150
+    },
+    "PMP Account.md": {
+      "initial": 69,
+      "current": 124
+    },
+    "Compensation Web Application.md": {
+      "initial": 35,
+      "current": 35
+    },
+    "CPHLN CanCOGeN Sequencing Subcommittee Meeting 2021-12-09.md": {
+      "initial": 38,
+      "current": 47
+    },
+    "CPHLN CanCOGeN Sequencing Subcommittee Meeting 2022-01-06.md": {
+      "initial": 38,
+      "current": 58
+    },
+    "CPHLN CanCOGeN Sequencing Subcommittee Meeting.md": {
+      "initial": 32,
+      "current": 51
+    },
+    "CanCOGeN Sequencing Subcommittee.md": {
+      "initial": 30,
+      "current": 71
+    },
+    "CPHLN CanCOGeN Sequencing Subcommittee.md": {
+      "initial": 74,
+      "current": 27
+    },
+    "CPHLN CanCOGeN Capacity Development Subcommittee.md": {
+      "initial": 32,
+      "current": 27
+    },
+    "CanCOGeN Subcommittees.md": {
+      "initial": 171,
+      "current": 153
+    },
+    "CanCOGeN Data Analytics Subcommittee.md": {
+      "initial": 30,
+      "current": 32
+    },
+    "CPHLN CanCOGeN Data Analytics Subcommittee.md": {
+      "initial": 34,
+      "current": 27
+    },
+    "CanCOGeN Steering Subcommittee.md": {
+      "initial": 28,
+      "current": 28
+    },
+    "CPHLN CanCOGeN Steering Subcommittee.md": {
+      "initial": 29,
+      "current": 24
+    },
+    "CanCOGeN.md": {
+      "initial": 275,
+      "current": 320
+    },
+    "CPHLN CanCOGeN Steering Committee Meeting 2021-12-17.md": {
+      "initial": 606,
+      "current": 609
+    },
+    "Privacy Basics and Privacy Impact Assessments.md": {
+      "initial": 31,
+      "current": 31
+    },
+    "Harassment and Violence Prevention for Employees.md": {
       "initial": 32,
       "current": 32
     },
-    "How to sequence COVID-19 using the ARTIC protocol.md": {
-      "initial": 261,
-      "current": 261
-    },
-    "CLIMB-COVID.md": {
-      "initial": 19,
-      "current": 84
-    },
-    "SARS-CoV-2 sequence quality control and ncov-qc.md": {
-      "initial": 167,
-      "current": 167
-    },
-    "SARS-CoV-2 Phylogenetics.md": {
-      "initial": 37,
-      "current": 37
-    },
-    "CLIMB Seminar 08 How do we detect and define new variants.md": {
-      "initial": 149,
-      "current": 149
-    },
-    "CLIMB ARTIC Nanopore Bioinformatics Pipeline.md": {
-      "initial": 170,
-      "current": 170
-    },
-    "CLIMB ARTIC Nanopore+Illumina Nextflow Pipeline.md": {
-      "initial": 51,
-      "current": 51
-    },
-    "NML SARS-CoV-2 Bioinformatics Pipeline.md": {
-      "initial": 73,
-      "current": 73
-    },
-    "PANGO Network.md": {
-      "initial": 10,
-      "current": 36
-    },
-    "Pangolin.md": {
-      "initial": 52,
-      "current": 58
-    },
-    "Pango Designation.md": {
-      "initial": 16,
-      "current": 36
-    },
-    "VOC VUI Monitoring.md": {
-      "initial": 18,
-      "current": 122
-    },
-    "Living Evidence SARS-CoV-2 Variants.md": {
-      "initial": 18,
-      "current": 41
-    },
-    "outbreak.info.md": {
-      "initial": 16,
-      "current": 20
-    },
-    "NextStrain.md": {
-      "initial": 14,
-      "current": 42
-    },
-    "Introduction to Git.md": {
-      "initial": 1,
-      "current": 20
-    },
-    "Command-Line Wizardry.md": {
-      "initial": 30,
-      "current": 32
+    "Fundamentals of Information Management.md": {
+      "initial": 29,
+      "current": 27
     },
     "Phoenix Navigation Overview.md": {
-      "initial": 24,
-      "current": 28
+      "initial": 26,
+      "current": 26
     },
-    "Kanban.md": {
-      "initial": 227,
-      "current": 229
+    "NML Metadata.md": {
+      "initial": 26,
+      "current": 26
     },
-    "LIMS Training.md": {
-      "initial": 25,
-      "current": 46
+    "CanCOGeN Metadata Curation.md": {
+      "initial": 29,
+      "current": 67
     },
-    "Meet with Adrian.md": {
-      "initial": 1,
-      "current": 31
+    "Meet with Natalie.md": {
+      "initial": 1209,
+      "current": 1210
     },
-    "Who We Work For.md": {
-      "initial": 33,
-      "current": 34
+    "NML Training.md": {
+      "initial": 417,
+      "current": 419
     },
-    "Phoenix Self Service for Employees.md": {
-      "initial": 144,
-      "current": 146
-    },
-    "R.md": {
-      "initial": 1,
-      "current": 17
-    },
-    "MyLearning.md": {
-      "initial": 14,
-      "current": 25
-    },
-    "Orientation Session for New Employees.md": {
-      "initial": 31,
-      "current": 48
-    },
-    "Madison Chapel.md": {
-      "initial": 31,
-      "current": 57
-    },
-    "SARS-CoV-2 Metadata.md": {
-      "initial": 34,
-      "current": 28
+    "CanCOGeN Metadata.md": {
+      "initial": 64,
+      "current": 151
     },
     "LIMS.md": {
-      "initial": 44,
-      "current": 54
+      "initial": 54,
+      "current": 146
     },
-    "Compensation Web Application.md": {
-      "initial": 19,
-      "current": 35
+    "CNPHI.md": {
+      "initial": 112,
+      "current": 107
     },
-    "CanCOGeN Meetings.md": {
-      "initial": 163,
-      "current": 165
-    },
-    "Meet with Emily.md": {
-      "initial": 28,
-      "current": 36
+    "Data Analytics.md": {
+      "initial": 26,
+      "current": 43
     }
   }
 }
