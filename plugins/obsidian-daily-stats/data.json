@@ -1,200 +1,270 @@
 {
   "dayCounts": {
     "2022/0/5": 1897,
-    "2022/0/6": 577
+    "2022/0/6": 577,
+    "2022/0/7": 475,
+    "2022/0/10": 1776
   },
   "todaysWordCount": {
-    "2022-01-06.md": {
-      "initial": 41,
-      "current": 41
+    "2022-01-10.md": {
+      "initial": 40,
+      "current": 83
     },
-    "Kanban.md": {
-      "initial": 229,
-      "current": 240
+    "CPHLN CanCOGeN Technical Data Subcommittee Meeting 2022-01-10.md": {
+      "initial": 81,
+      "current": 129
     },
-    "Writing Bootcamp Lunch.md": {
-      "initial": 28,
-      "current": 36
+    "CLIMB Seminar 05 SARS-CoV-2 sequence quality control and ncov-qc.md": {
+      "initial": 170,
+      "current": 170
     },
-    "Metadata Training.md": {
-      "initial": 66,
-      "current": 64
+    "Meet with Natalie.md": {
+      "initial": 1208,
+      "current": 1209
     },
-    "obsidian-public/academic/Update Personal Website.md": {
-      "initial": 18,
-      "current": 18
+    "CPHLN CanCOGeN Sequencing Subcommittee Meeting 2022-01-06.md": {
+      "initial": 58,
+      "current": 59
     },
-    "Python Tutorial.md": {
+    "Meet with Adrian.md": {
+      "initial": 31,
+      "current": 31
+    },
+    "Provincial Report Generation.md": {
+      "initial": 21,
+      "current": 21
+    },
+    "Data Processing Shadow.md": {
       "initial": 28,
       "current": 28
-    },
-    "NML Bioinformatics Lab Meeting.md": {
-      "initial": 452,
-      "current": 453
-    },
-    "obsidian-public/academic/Pla Depletion Figure.md": {
-      "initial": 136,
-      "current": 138
-    },
-    "obsidian-public/academic/Pipeline Update v0.1.2.md": {
-      "initial": 364,
-      "current": 366
-    },
-    "obsidian-public/academic/Archive PhD Papers.md": {
-      "initial": 49,
-      "current": 49
-    },
-    "Pango Designation.md": {
-      "initial": 36,
-      "current": 38
-    },
-    "Living Evidence SARS-CoV-2 Variants.md": {
-      "initial": 42,
-      "current": 43
-    },
-    "VOC VUI Monitoring.md": {
-      "initial": 122,
-      "current": 125
-    },
-    "Rstudio Server.md": {
-      "initial": 25,
-      "current": 25
-    },
-    "PANGO Network.md": {
-      "initial": 36,
-      "current": 36
-    },
-    "Visual Studio Code.md": {
-      "initial": 54,
-      "current": 54
-    },
-    "obsidian-public/academic/PhD Defense.md": {
-      "initial": 20,
-      "current": 22
-    },
-    "NextCloud Share.md": {
-      "initial": 42,
-      "current": 42
     },
     "obsidian-public/academic/Black Death Paper Map.md": {
       "initial": 25,
       "current": 25
     },
-    "CanCOGeN Meetings.md": {
-      "initial": 165,
-      "current": 161
-    },
-    "Meet with Emily.md": {
-      "initial": 36,
-      "current": 150
-    },
     "PMP Account.md": {
-      "initial": 69,
-      "current": 124
+      "initial": 124,
+      "current": 125
+    },
+    "Kanban.md": {
+      "initial": 252,
+      "current": 256
+    },
+    "Health and Dental Benefits.md": {
+      "initial": 56,
+      "current": 58
+    },
+    "Mandatory Training.md": {
+      "initial": 64,
+      "current": 69
+    },
+    "obsidian-public/academic/Troubleshoot ancient sample.md": {
+      "initial": 19,
+      "current": 20
+    },
+    "obsidian-public/academic/Download Latvian Sample.md": {
+      "initial": 26,
+      "current": 26
+    },
+    "obsidian-public/academic/Fix Manubot Cite Italics.md": {
+      "initial": 20,
+      "current": 20
+    },
+    "NML CCGP & CanCOGeN Coordination Meeting 2022-01-14.md": {
+      "initial": 52,
+      "current": 53
+    },
+    "obsidian-public/academic/Remote Development on Clusters with VSCode.md": {
+      "initial": 27,
+      "current": 44
+    },
+    "Book Time Off.md": {
+      "initial": 24,
+      "current": 25
+    },
+    "NextCloud Share.md": {
+      "initial": 42,
+      "current": 84
     },
     "Compensation Web Application.md": {
       "initial": 35,
-      "current": 35
+      "current": 39
     },
-    "CPHLN CanCOGeN Sequencing Subcommittee Meeting 2021-12-09.md": {
+    "CDC Genomic Epidemiology.md": {
+      "initial": 37,
+      "current": 37
+    },
+    "CDC COVID-19 Genomic Epidemiology Toolkit.md": {
+      "initial": 43,
+      "current": 351
+    },
+    "NML Training.md": {
+      "initial": 376,
+      "current": 234
+    },
+    "SARS-CoV-2.md": {
+      "initial": 491,
+      "current": 546
+    },
+    "SARS-CoV-2 Alpha.md": {
+      "initial": 14,
+      "current": 20
+    },
+    "MicrobeTrace.md": {
+      "initial": 13,
+      "current": 34
+    },
+    "UShER.md": {
+      "initial": 18,
+      "current": 49
+    },
+    "CLIMB Seminar 07 Practical phylogenetics lineages & variants.md": {
+      "initial": 242,
+      "current": 246
+    },
+    "Orientation Session for New Employees.md": {
+      "initial": 48,
+      "current": 117
+    },
+    "obsidian-public/academic/From histograms to dashboards An introduction to data visualization with Python.md": {
       "initial": 38,
-      "current": 47
-    },
-    "CPHLN CanCOGeN Sequencing Subcommittee Meeting 2022-01-06.md": {
-      "initial": 38,
-      "current": 58
-    },
-    "CPHLN CanCOGeN Sequencing Subcommittee Meeting.md": {
-      "initial": 32,
-      "current": 51
-    },
-    "CanCOGeN Sequencing Subcommittee.md": {
-      "initial": 30,
-      "current": 71
-    },
-    "CPHLN CanCOGeN Sequencing Subcommittee.md": {
-      "initial": 74,
-      "current": 27
-    },
-    "CPHLN CanCOGeN Capacity Development Subcommittee.md": {
-      "initial": 32,
-      "current": 27
-    },
-    "CanCOGeN Subcommittees.md": {
-      "initial": 171,
-      "current": 153
-    },
-    "CanCOGeN Data Analytics Subcommittee.md": {
-      "initial": 30,
-      "current": 32
-    },
-    "CPHLN CanCOGeN Data Analytics Subcommittee.md": {
-      "initial": 34,
-      "current": 27
-    },
-    "CanCOGeN Steering Subcommittee.md": {
-      "initial": 28,
-      "current": 28
-    },
-    "CPHLN CanCOGeN Steering Subcommittee.md": {
-      "initial": 29,
-      "current": 24
-    },
-    "CanCOGeN.md": {
-      "initial": 275,
-      "current": 320
-    },
-    "CPHLN CanCOGeN Steering Committee Meeting 2021-12-17.md": {
-      "initial": 606,
-      "current": 609
-    },
-    "Privacy Basics and Privacy Impact Assessments.md": {
-      "initial": 31,
-      "current": 31
-    },
-    "Harassment and Violence Prevention for Employees.md": {
-      "initial": 32,
-      "current": 32
-    },
-    "Fundamentals of Information Management.md": {
-      "initial": 29,
-      "current": 27
+      "current": 53
     },
     "Phoenix Navigation Overview.md": {
       "initial": 26,
-      "current": 26
+      "current": 31
     },
-    "NML Metadata.md": {
-      "initial": 26,
-      "current": 26
+    "Privacy Basics and Privacy Impact Assessments.md": {
+      "initial": 31,
+      "current": 52
     },
-    "CanCOGeN Metadata Curation.md": {
-      "initial": 29,
-      "current": 67
+    "Data Analytics Meeting.md": {
+      "initial": 310,
+      "current": 316
     },
-    "Meet with Natalie.md": {
-      "initial": 1209,
-      "current": 1210
+    "surveilleR.md": {
+      "initial": 304,
+      "current": 306
     },
-    "NML Training.md": {
-      "initial": 417,
-      "current": 419
+    "CPHLN CanCOGeN Data Analytics Subcommittee Meeting 2021-01-10.md": {
+      "initial": 30,
+      "current": 450
     },
-    "CanCOGeN Metadata.md": {
-      "initial": 64,
-      "current": 151
+    "Harassment and Violence Prevention for Employees.md": {
+      "initial": 32,
+      "current": 43
     },
-    "LIMS.md": {
-      "initial": 54,
-      "current": 146
+    "Fundamentals of Information Management.md": {
+      "initial": 27,
+      "current": 44
+    },
+    "Rapid Test Tracker.md": {
+      "initial": 19,
+      "current": 25
+    },
+    "Gary Van Domselaar.md": {
+      "initial": 18,
+      "current": 19
+    },
+    "Border Porosity Analysis.md": {
+      "initial": 27,
+      "current": 33
+    },
+    "obsidian-public/academic/seldon.md": {
+      "initial": 13,
+      "current": 35
+    },
+    "obsidian-public/academic/@duchene2021ImpactPublicHealth.md": {
+      "initial": 341,
+      "current": 378
+    },
+    "Transmission Network Analysis.md": {
+      "initial": 12,
+      "current": 14
+    },
+    "Transmission Network.md": {
+      "initial": 12,
+      "current": 14
     },
     "CNPHI.md": {
-      "initial": 112,
-      "current": 107
+      "initial": 106,
+      "current": 108
     },
-    "Data Analytics.md": {
+    "Phoenix Self Service for Employees.md": {
+      "initial": 146,
+      "current": 146
+    },
+    "Who We Work For.md": {
+      "initial": 34,
+      "current": 34
+    },
+    "Conda and Slurm Workshop.md": {
+      "initial": 54,
+      "current": 54
+    },
+    "Indigenous Learning Series.md": {
       "initial": 26,
-      "current": 43
+      "current": 25
+    },
+    "IM.md": {
+      "initial": 8,
+      "current": 13
+    },
+    "CanCOGeN.md": {
+      "initial": 321,
+      "current": 327
+    },
+    "obsidian-public/academic/Plagues and People Guest Lecture.md": {
+      "initial": 22,
+      "current": 28
+    },
+    "obsidian-public/academic/PhD Defense.md": {
+      "initial": 22,
+      "current": 24
+    },
+    "In Review - Day.md": {
+      "initial": 142,
+      "current": 39
+    },
+    "CPHLN CanCOGeN Data Analytics Subcommittee.md": {
+      "initial": 28,
+      "current": 439
+    },
+    "2021-12-13.md": {
+      "initial": 224,
+      "current": 235
+    },
+    "2021-12-21.md": {
+      "initial": 113,
+      "current": 124
+    },
+    "PHAC All-Staff Town Hall.md": {
+      "initial": 35,
+      "current": 36
+    },
+    "Python Tutorial.md": {
+      "initial": 28,
+      "current": 28
+    },
+    "CPHLN CanCOGeN Technical Data Subcommittee.md": {
+      "initial": 118,
+      "current": 122
+    },
+    "CPHLN Variant Surveillance Working Group.md": {
+      "initial": 529,
+      "current": 576
+    },
+    "CPHLN CanCOGeN Steering Subcommittee.md": {
+      "initial": 24,
+      "current": 28
+    },
+    "CPHLN CanCOGeN Sequencing Subcommittee.md": {
+      "initial": 27,
+      "current": 48
+    },
+    "PhD Defense Presentation.md": {
+      "initial": 12,
+      "current": 19
     }
   }
 }
