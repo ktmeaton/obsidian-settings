@@ -54,5 +54,11 @@
     "viewDisplayed": true
   },
   "maxClusterRadiusPixels": 20,
-  "searchProvider": "osm"
+  "searchProvider": "osm",
+  "defaultZoom": 6,
+  "defaultMapCenter": {
+    "lat": 55.007033839987585,
+    "lng": 5.681497562631825
+  },
+  "defaultTags": []
 }
