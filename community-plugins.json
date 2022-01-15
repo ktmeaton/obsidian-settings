@@ -1,5 +1,4 @@
 [
-  "table-editor-obsidian",
   "calendar",
   "dataview",
   "obsidian-day-planner",
@@ -20,5 +19,8 @@
   "obsidian-emoji-toolbar",
   "better-word-count",
   "obsidian-daily-stats",
-  "obsidian-advanced-slides"
+  "obsidian-advanced-slides",
+  "table-editor-obsidian",
+  "csv-obsidian",
+  "obsidian-csv-table"
 ]
