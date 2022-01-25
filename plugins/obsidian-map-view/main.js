@@ -17287,7 +17287,6 @@ createCommonjsModule(function (module, exports) {
 });
 
 const DEFAULT_SETTINGS = {
-    darkMode: false,
     markerIconRules: [
         { ruleName: "default", preset: true, iconDetails: { "prefix": "fas", "icon": "fa-circle", "markerColor": "blue" } },
         { ruleName: "#trip", preset: false, iconDetails: { "prefix": "fas", "icon": "fa-hiking", "markerColor": "green" } },
@@ -17308,7 +17307,9 @@ const DEFAULT_SETTINGS = {
     ],
     mapControls: { filtersDisplayed: true, viewDisplayed: true },
     maxClusterRadiusPixels: 20,
-    searchProvider: 'osm'
+    searchProvider: 'osm',
+    mapSources: [{ name: 'OpenStreetMap', urlLight: TILES_URL_OPENSTREETMAP }],
+    chosenMapMode: 'auto'
 };
 function convertLegacyMarkerIcons(settings) {
     if (settings.markerIcons) {
@@ -17318,6 +17319,14 @@ function convertLegacyMarkerIcons(settings) {
             settings.markerIconRules.push(newRule);
         }
         settings.markerIcons = null;
+        return true;
+    }
+    return false;
+}
+function convertLegacyTilesUrl(settings) {
+    if (settings.tilesUrl) {
+        settings.mapSources = [{ name: 'Default', urlLight: settings.tilesUrl }];
+        settings.tilesUrl = null;
         return true;
     }
     return false;
@@ -17708,8 +17717,8 @@ function verifyLocation(location) {
 function matchInlineLocation(content) {
     // Old syntax of ` `location: ... ` `. This syntax doesn't support a name so we leave an empty capture group
     const locationRegex1 = /\`()location:\s*\[?([0-9.\-]+)\s*,\s*([0-9.\-]+)\]?\`/g;
-    // New syntax of `[name](geo:...)` and an optional tag as `tag:tagName`
-    const locationRegex2 = /\[(.*)\]\(geo:([0-9.\-]+),([0-9.\-]+)\)[ \t]*(tag:[\w\/]+)?/g;
+    // New syntax of `[name](geo:...)` and an optional tags as `tag:tagName` separated by whitespaces
+    const locationRegex2 = /\[(.*?)\]\(geo:([0-9.\-]+),([0-9.\-]+)\)[ \t]*((?:tag:[\w\/\-]+\s+)*)/g;
     const matches1 = content.matchAll(locationRegex1);
     const matches2 = content.matchAll(locationRegex2);
     return Array.from(matches1).concat(Array.from(matches2));
@@ -17727,8 +17736,12 @@ function getMarkersFromFileContent(file, settings, app) {
                 if (match[1] && match[1].length > 0)
                     marker.extraName = match[1];
                 if (match[4]) {
-                    const tagName = '#' + match[4].slice('tag:'.length);
-                    marker.tags.push(tagName);
+                    // Parse the list of tags
+                    const tagRegex = /tag:([\w\/\-]+)/g;
+                    const tags = match[4].matchAll(tagRegex);
+                    for (const tag of tags)
+                        if (tag[1])
+                            marker.tags.push('#' + tag[1]);
                 }
                 marker.fileLocation = match.index;
                 marker.icon = getIconForMarker(marker, settings, app);
@@ -17815,6 +17828,7 @@ class MapView extends obsidian.ItemView {
         };
         this.isOpen = false;
         this.onAfterOpen = null;
+        this.updateMapSources = () => { };
         this.navigation = true;
         this.settings = settings;
         this.plugin = plugin;
@@ -17844,94 +17858,31 @@ class MapView extends obsidian.ItemView {
         this.app.vault.on('delete', file => this.updateMarkersWithRelationToFile(file.path, null, true));
         this.app.vault.on('rename', (file, oldPath) => this.updateMarkersWithRelationToFile(oldPath, file, true));
         this.app.metadataCache.on('changed', file => this.updateMarkersWithRelationToFile(file.path, file, false));
+        this.app.workspace.on('css-change', () => {
+            console.log('Map view: map refresh due to CSS change');
+            this.refreshMap();
+        });
     }
     getViewType() { return 'map'; }
     getDisplayText() { return 'Interactive Map View'; }
+    isDarkMode(settings) {
+        if (settings.chosenMapMode === 'dark')
+            return true;
+        if (settings.chosenMapMode === 'light')
+            return false;
+        // Auto mode - check if the theme is dark
+        if (this.app.vault.getConfig('theme') === 'obsidian')
+            return true;
+        return false;
+    }
     onOpen() {
         const _super = Object.create(null, {
             onOpen: { get: () => super.onOpen }
         });
         return __awaiter(this, void 0, void 0, function* () {
-            var that = this;
             this.isOpen = true;
             this.state = this.defaultState;
-            let controlsDiv = createDiv({
-                'cls': 'graph-controls'
-            });
-            let filtersDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
-            filtersDiv.innerHTML = `
-			<input id="filtersCollapsible" class="toggle" type="checkbox">
-			<label for="filtersCollapsible" class="lbl-toggle">Filters</label>
-			`;
-            const filtersButton = filtersDiv.getElementsByClassName('toggle')[0];
-            filtersButton.checked = this.settings.mapControls.filtersDisplayed;
-            filtersButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
-                this.settings.mapControls.filtersDisplayed = filtersButton.checked;
-                this.plugin.saveSettings();
-            });
-            let filtersContent = filtersDiv.createDiv({ 'cls': 'graph-control-content' });
-            this.display.tagsBox = new obsidian.TextComponent(filtersContent);
-            this.display.tagsBox.setPlaceholder('Tags, e.g. "#one,#two"');
-            this.display.tagsBox.onChange((tagsBox) => __awaiter(this, void 0, void 0, function* () {
-                that.state.tags = tagsBox.split(',').filter(t => t.length > 0);
-                yield this.updateMapToState(this.state, this.settings.autoZoom);
-            }));
-            let tagSuggestions = new obsidian.DropdownComponent(filtersContent);
-            tagSuggestions.setValue('Quick add tag');
-            tagSuggestions.addOption('', 'Quick add tag');
-            for (const tagName of this.getAllTagNames())
-                tagSuggestions.addOption(tagName, tagName);
-            tagSuggestions.onChange(value => {
-                let currentTags = this.display.tagsBox.getValue();
-                if (currentTags.indexOf(value) < 0) {
-                    this.display.tagsBox.setValue(currentTags.split(',').filter(tag => tag.length > 0).concat([value]).join(','));
-                }
-                tagSuggestions.setValue('Quick add tag');
-                this.display.tagsBox.inputEl.focus();
-                this.display.tagsBox.onChanged();
-            });
-            let viewDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
-            viewDiv.innerHTML = `
-			<input id="viewCollapsible" class="toggle" type="checkbox">
-			<label for="viewCollapsible" class="lbl-toggle">View</label>
-			`;
-            const viewButton = viewDiv.getElementsByClassName('toggle')[0];
-            viewButton.checked = this.settings.mapControls.viewDisplayed;
-            viewButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
-                this.settings.mapControls.viewDisplayed = viewButton.checked;
-                this.plugin.saveSettings();
-            });
-            let viewDivContent = viewDiv.createDiv({ 'cls': 'graph-control-content' });
-            let goDefault = new obsidian.ButtonComponent(viewDivContent);
-            goDefault
-                .setButtonText('Reset')
-                .setTooltip('Reset the view to the defined default.')
-                .onClick(() => __awaiter(this, void 0, void 0, function* () {
-                let newState = {
-                    mapZoom: this.settings.defaultZoom || DEFAULT_ZOOM,
-                    mapCenter: this.settings.defaultMapCenter || DEFAULT_CENTER,
-                    tags: this.settings.defaultTags || DEFAULT_TAGS,
-                    version: this.state.version + 1
-                };
-                yield this.updateMapToState(newState, false);
-            }));
-            let fitButton = new obsidian.ButtonComponent(viewDivContent);
-            fitButton
-                .setButtonText('Fit')
-                .setTooltip('Set the map view to fit all currently-displayed markers.')
-                .onClick(() => this.autoFitMapToMarkers());
-            let setDefault = new obsidian.ButtonComponent(viewDivContent);
-            setDefault
-                .setButtonText('Set as Default')
-                .setTooltip('Set this view (map state & filters) as default.')
-                .onClick(() => __awaiter(this, void 0, void 0, function* () {
-                this.settings.defaultZoom = this.state.mapZoom;
-                this.settings.defaultMapCenter = this.state.mapCenter;
-                this.settings.defaultTags = this.state.tags;
-                yield this.plugin.saveSettings();
-            }));
-            this.contentEl.style.padding = '0px 0px';
-            this.contentEl.append(controlsDiv);
+            this.display.controlsDiv = this.createControls();
             this.display.mapDiv = createDiv({ cls: 'map' }, (el) => {
                 el.style.zIndex = '1';
                 el.style.width = '100%';
@@ -17946,6 +17897,108 @@ class MapView extends obsidian.ItemView {
             return _super.onOpen.call(this);
         });
     }
+    createControls() {
+        var _a, _b;
+        var that = this;
+        let controlsDiv = createDiv({
+            'cls': 'graph-controls'
+        });
+        let filtersDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
+        filtersDiv.innerHTML = `
+			<input id="filtersCollapsible" class="toggle" type="checkbox">
+			<label for="filtersCollapsible" class="lbl-toggle">Filters</label>
+			`;
+        const filtersButton = filtersDiv.getElementsByClassName('toggle')[0];
+        filtersButton.checked = this.settings.mapControls.filtersDisplayed;
+        filtersButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+            this.settings.mapControls.filtersDisplayed = filtersButton.checked;
+            this.plugin.saveSettings();
+        });
+        let filtersContent = filtersDiv.createDiv({ 'cls': 'graph-control-content' });
+        this.display.tagsBox = new obsidian.TextComponent(filtersContent);
+        this.display.tagsBox.setPlaceholder('Tags, e.g. "#one,#two"');
+        this.display.tagsBox.onChange((tagsBox) => __awaiter(this, void 0, void 0, function* () {
+            that.state.tags = tagsBox.split(',').filter(t => t.length > 0);
+            yield this.updateMapToState(this.state, this.settings.autoZoom);
+        }));
+        let tagSuggestions = new obsidian.DropdownComponent(filtersContent);
+        tagSuggestions.setValue('Quick add tag');
+        tagSuggestions.addOption('', 'Quick add tag');
+        for (const tagName of this.getAllTagNames())
+            tagSuggestions.addOption(tagName, tagName);
+        tagSuggestions.onChange(value => {
+            let currentTags = this.display.tagsBox.getValue();
+            if (currentTags.indexOf(value) < 0) {
+                this.display.tagsBox.setValue(currentTags.split(',').filter(tag => tag.length > 0).concat([value]).join(','));
+            }
+            tagSuggestions.setValue('Quick add tag');
+            this.display.tagsBox.inputEl.focus();
+            this.display.tagsBox.onChanged();
+        });
+        let viewDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
+        viewDiv.innerHTML = `
+			<input id="viewCollapsible" class="toggle" type="checkbox">
+			<label for="viewCollapsible" class="lbl-toggle">View</label>
+			`;
+        const viewButton = viewDiv.getElementsByClassName('toggle')[0];
+        viewButton.checked = this.settings.mapControls.viewDisplayed;
+        viewButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+            this.settings.mapControls.viewDisplayed = viewButton.checked;
+            this.plugin.saveSettings();
+        });
+        let viewDivContent = viewDiv.createDiv({ 'cls': 'graph-control-content' });
+        let mapSource = new obsidian.DropdownComponent(viewDivContent);
+        for (const [index, source] of this.settings.mapSources.entries()) {
+            mapSource.addOption(index.toString(), source.name);
+        }
+        this.updateMapSources();
+        mapSource.onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            this.settings.chosenMapSource = parseInt(value);
+            yield this.plugin.saveSettings();
+            this.refreshMap();
+        }));
+        const chosenMapSource = (_a = this.settings.chosenMapSource) !== null && _a !== void 0 ? _a : 0;
+        mapSource.setValue(chosenMapSource.toString());
+        let sourceMode = new obsidian.DropdownComponent(viewDivContent);
+        sourceMode.addOptions({ auto: 'Auto', light: 'Light', dark: 'Dark' })
+            .setValue((_b = this.settings.chosenMapMode) !== null && _b !== void 0 ? _b : 'auto')
+            .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            this.settings.chosenMapMode = value;
+            yield this.plugin.saveSettings();
+            this.refreshMap();
+        }));
+        let goDefault = new obsidian.ButtonComponent(viewDivContent);
+        goDefault
+            .setButtonText('Reset')
+            .setTooltip('Reset the view to the defined default.')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            let newState = {
+                mapZoom: this.settings.defaultZoom || DEFAULT_ZOOM,
+                mapCenter: this.settings.defaultMapCenter || DEFAULT_CENTER,
+                tags: this.settings.defaultTags || DEFAULT_TAGS,
+                version: this.state.version + 1
+            };
+            yield this.updateMapToState(newState, false);
+        }));
+        let fitButton = new obsidian.ButtonComponent(viewDivContent);
+        fitButton
+            .setButtonText('Fit')
+            .setTooltip('Set the map view to fit all currently-displayed markers.')
+            .onClick(() => this.autoFitMapToMarkers());
+        let setDefault = new obsidian.ButtonComponent(viewDivContent);
+        setDefault
+            .setButtonText('Set as Default')
+            .setTooltip('Set this view (map state & filters) as default.')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            this.settings.defaultZoom = this.state.mapZoom;
+            this.settings.defaultMapCenter = this.state.mapCenter;
+            this.settings.defaultTags = this.state.tags;
+            yield this.plugin.saveSettings();
+        }));
+        this.contentEl.style.padding = '0px 0px';
+        this.contentEl.append(controlsDiv);
+        return controlsDiv;
+    }
     onClose() {
         this.isOpen = false;
         return super.onClose();
@@ -17953,9 +18006,22 @@ class MapView extends obsidian.ItemView {
     onResize() {
         this.display.map.invalidateSize();
     }
-    createMap() {
-        var _a;
+    refreshMap() {
+        var _a, _b, _c, _d, _e, _f, _g;
         return __awaiter(this, void 0, void 0, function* () {
+            (_b = (_a = this.display) === null || _a === void 0 ? void 0 : _a.map) === null || _b === void 0 ? void 0 : _b.off();
+            (_d = (_c = this.display) === null || _c === void 0 ? void 0 : _c.map) === null || _d === void 0 ? void 0 : _d.remove();
+            (_f = (_e = this.display) === null || _e === void 0 ? void 0 : _e.markers) === null || _f === void 0 ? void 0 : _f.clear();
+            (_g = this.display) === null || _g === void 0 ? void 0 : _g.controlsDiv.remove();
+            this.display.controlsDiv = this.createControls();
+            this.createMap();
+            this.updateMapToState(this.state, false, true);
+        });
+    }
+    createMap() {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+            const isDark = this.isDarkMode(this.settings);
             this.display.map = new leafletSrc.Map(this.display.mapDiv, {
                 center: this.defaultState.mapCenter,
                 zoom: this.defaultState.mapZoom,
@@ -17966,16 +18032,25 @@ class MapView extends obsidian.ItemView {
             leafletSrc.control.zoom({
                 position: 'topright'
             }).addTo(this.display.map);
-            const attribution = this.settings.tilesUrl === DEFAULT_SETTINGS.tilesUrl ?
+            const chosenMapSource = this.settings.mapSources[(_a = this.settings.chosenMapSource) !== null && _a !== void 0 ? _a : 0];
+            const attribution = chosenMapSource.urlLight === DEFAULT_SETTINGS.mapSources[0].urlLight ?
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' : '';
-            this.display.map.addLayer(new leafletSrc.TileLayer(this.settings.tilesUrl, {
+            let revertMap = false;
+            let mapSourceUrl = chosenMapSource.urlLight;
+            if (isDark) {
+                if (chosenMapSource.urlDark)
+                    mapSourceUrl = chosenMapSource.urlDark;
+                else
+                    revertMap = true;
+            }
+            this.display.map.addLayer(new leafletSrc.TileLayer(mapSourceUrl, {
                 maxZoom: 20,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                 attribution: attribution,
-                className: this.settings.darkMode ? "dark-mode" : ""
+                className: revertMap ? "dark-mode" : ""
             }));
             this.display.clusterGroup = new leafletSrc.MarkerClusterGroup({
-                maxClusterRadius: (_a = this.settings.maxClusterRadiusPixels) !== null && _a !== void 0 ? _a : DEFAULT_SETTINGS.maxClusterRadiusPixels
+                maxClusterRadius: (_b = this.settings.maxClusterRadiusPixels) !== null && _b !== void 0 ? _b : DEFAULT_SETTINGS.maxClusterRadiusPixels
             });
             this.display.map.addLayer(this.display.clusterGroup);
             const suggestor = new LocationSuggest(this.app, this.settings);
@@ -18060,13 +18135,13 @@ class MapView extends obsidian.ItemView {
     }
     // Updates the map to the given state and then sets the state accordingly, but only if the given state version
     // is not lower than the current state version (so concurrent async updates always keep the latest one)
-    updateMapToState(state, autoFit = false) {
+    updateMapToState(state, autoFit = false, force = false) {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.settings.debug)
                 console.time('updateMapToState');
             const files = this.getFileListByQuery(state.tags);
             let newMarkers = yield buildMarkers(files, this.settings, this.app);
-            if (state.version < this.state.version) {
+            if (state.version < this.state.version && !force) {
                 // If the state we were asked to update is old (e.g. because while we were building markers a newer instance
                 // of the method was called), cancel the update
                 return;
@@ -18143,7 +18218,7 @@ class MapView extends obsidian.ItemView {
                 content += `<p class="map-view-extra-name">${marker.extraName}</p>`;
             if (marker.snippet)
                 content += `<p class="map-view-marker-snippet">${marker.snippet}</p>`;
-            newMarker.bindPopup(content, { closeButton: false, autoPan: false }).openPopup();
+            newMarker.bindPopup(content, { closeButton: true, autoPan: false }).openPopup();
         });
         newMarker.on('mouseout', (event) => {
             newMarker.closePopup();
@@ -18265,6 +18340,7 @@ class MapView extends obsidian.ItemView {
 class SettingsTab extends obsidian.PluginSettingTab {
     constructor(app, plugin) {
         super(app, plugin);
+        this.refreshPluginOnHide = false;
         this.plugin = plugin;
     }
     display() {
@@ -18413,16 +18489,19 @@ class SettingsTab extends obsidian.PluginSettingTab {
             }));
         });
         new obsidian.Setting(containerEl)
-            .setName('Map source (advanced)')
-            .setDesc('Source for the map tiles, see the documentation for more details. Requires to close & reopen the map.')
-            .addText(component => {
-            component
-                .setValue(this.plugin.settings.tilesUrl)
-                .onChange((value) => __awaiter(this, void 0, void 0, function* () {
-                this.plugin.settings.tilesUrl = value;
-                yield this.plugin.saveSettings();
-            }));
-        });
+            .setHeading().setName('Map Sources')
+            .setDesc('Change and switch between sources for map tiles. An optional dark mode URL can be defined for each source. If no such URL is defined and dark mode is used, the map colors are reverted. See the documentation for more details.');
+        let mapSourcesDiv = null;
+        new obsidian.Setting(containerEl)
+            .addButton(component => component
+            .setButtonText('New map source')
+            .onClick(() => {
+            this.plugin.settings.mapSources.push({ name: '', urlLight: '', currentMode: 'auto' });
+            this.refreshMapSourceSettings(mapSourcesDiv);
+            this.refreshPluginOnHide = true;
+        }));
+        mapSourcesDiv = containerEl.createDiv();
+        this.refreshMapSourceSettings(mapSourcesDiv);
         new obsidian.Setting(containerEl)
             .setHeading().setName('Custom "Open In" Actions')
             .setDesc("'Open in' actions showing in geolocation-relevant popup menus. URL should have {x} and {y} as parameters to transfer.");
@@ -18477,6 +18556,63 @@ class SettingsTab extends obsidian.PluginSettingTab {
                 yield this.plugin.saveSettings();
             }));
         });
+    }
+    hide() {
+        if (this.refreshPluginOnHide) {
+            const mapViews = this.app.workspace.getLeavesOfType(MAP_VIEW_NAME);
+            for (const leaf of mapViews) {
+                const mapView = leaf.view;
+                mapView.refreshMap();
+                mapView.updateMapSources();
+            }
+        }
+    }
+    refreshMapSourceSettings(containerEl) {
+        containerEl.innerHTML = '';
+        for (const setting of this.plugin.settings.mapSources) {
+            const controls = new obsidian.Setting(containerEl)
+                .addText(component => {
+                component
+                    .setPlaceholder('Name')
+                    .setValue(setting.name)
+                    .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+                    setting.name = value;
+                    this.refreshPluginOnHide = true;
+                    yield this.plugin.saveSettings();
+                }))
+                    .inputEl.style.width = '10em';
+            })
+                .addText(component => {
+                component
+                    .setPlaceholder('URL (light/default)')
+                    .setValue(setting.urlLight)
+                    .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+                    setting.urlLight = value;
+                    this.refreshPluginOnHide = true;
+                    yield this.plugin.saveSettings();
+                }));
+            })
+                .addText(component => {
+                component
+                    .setPlaceholder('URL (dark) (optional)')
+                    .setValue(setting.urlDark)
+                    .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+                    setting.urlDark = value;
+                    this.refreshPluginOnHide = true;
+                    yield this.plugin.saveSettings();
+                }));
+            })
+                .addButton(component => component
+                .setButtonText('Delete')
+                .onClick(() => __awaiter(this, void 0, void 0, function* () {
+                this.plugin.settings.mapSources.remove(setting);
+                this.refreshPluginOnHide = true;
+                yield this.plugin.saveSettings();
+                this.refreshMapSourceSettings(containerEl);
+            })));
+            controls.settingEl.style.padding = '5px';
+            controls.settingEl.style.borderTop = 'none';
+        }
     }
     refreshOpenInSettings(containerEl) {
         containerEl.innerHTML = '';
@@ -18758,6 +18894,10 @@ class MapViewPlugin extends obsidian.Plugin {
             if (convertLegacyMarkerIcons(this.settings)) {
                 yield this.saveSettings();
                 new obsidian.Notice("Map View: legacy marker icons were converted to the new format");
+            }
+            if (convertLegacyTilesUrl(this.settings)) {
+                yield this.saveSettings();
+                new obsidian.Notice("Map View: legacy tiles URL was converted to the new format");
             }
             this.addCommand({
                 id: 'open-map-view',

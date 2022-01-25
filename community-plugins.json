@@ -6,14 +6,12 @@
   "shortcuts-extender",
   "sliding-panes-obsidian",
   "tag-wrangler",
-  "obsidian-tidy-footnotes",
   "obsidian-plantuml",
   "obsidian-admonition",
   "meld-encrypt",
   "obsidian-enhancing-mindmap",
   "obsidian-excalidraw-plugin",
   "obsidian-map-view",
-  "rss-reader",
   "obsidian42-brat",
   "obsidian-emoji-toolbar",
   "better-word-count",
@@ -21,5 +19,6 @@
   "obsidian-advanced-slides",
   "table-editor-obsidian",
   "csv-obsidian",
-  "obsidian-csv-table"
+  "obsidian-csv-table",
+  "periodic-notes"
 ]

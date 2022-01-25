@@ -72821,7 +72821,7 @@ var RevealRenderer = class {
     return md.slidify(markdown, slidifyOptions);
   }
   getCssPaths(css2) {
-    let input;
+    let input = [];
     if (!css2) {
       return input;
     }
@@ -72890,7 +72890,7 @@ var RevealServer = class {
 };
 
 // package.json
-var version = "1.5.4";
+var version = "1.6.0";
 
 // src/main.ts
 var import_path7 = __toModule(require("path"));
