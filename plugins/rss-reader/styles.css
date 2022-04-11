@@ -95,9 +95,11 @@ input.is-invalid {
     padding-top: 10px;
 }
 
-.rss-card-items .rss-item {
+.rss-card-items .rss-item-text {
     padding-left: 5px;
     text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 10em;
 }
 
 .rss-item-title {
@@ -112,6 +114,29 @@ input.is-invalid {
     background: var(--background-secondary);
 }
 
-mark li {
-    background: var(--text-highlight-bg);
+/*making sure both highlight styles look consistent*/
+.rss-modal li mark {
+    background-color: var(--text-highlight-bg);
+}
+
+
+.rss-modal mark li {
+    background-color: var(--text-highlight-bg);
+}
+
+.rss-modal mark {
+    background-color: var(--text-highlight-bg);
+}
+
+.rss-content .frontmatter {
+    display: none;
+}
+
+.rss-content .frontmatter-container {
+    display: none;
+}
+
+.rss-item-count {
+    margin-left: auto;
+    margin-right: 0;
 }

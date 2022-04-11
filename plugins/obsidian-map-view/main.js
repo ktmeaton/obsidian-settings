@@ -55,6 +55,14 @@ function __awaiter(thisArg, _arguments, P, generator) {
     });
 }
 
+const MAP_VIEW_NAME = 'map';
+// SVG editor used: https://svgedit.netlify.app/editor/index.html
+const RIBBON_ICON = '<path fill="currentColor" stroke="currentColor" d="m50.06001,1.76c-26.54347,0 -48.06001,21.74039 -48.06001,48.56c0,26.81961 21.51654,48.56 48.06001,48.56c26.54347,0 48.06001,-21.74039 48.06001,-48.56c0,-26.81961 -21.51654,-48.56 -48.06001,-48.56zm15.94701,70.02039c-0.75578,0.75973 -1.54838,1.55666 -2.19177,2.2087c-0.57943,0.58742 -0.98833,1.3119 -1.19569,2.09709c-0.29262,1.10826 -0.52905,2.22828 -0.92438,3.30325l-3.37001,9.17353c-2.66656,0.58742 -5.42613,0.91833 -8.26516,0.91833l0,-5.36118c0.32751,-2.47108 -1.48056,-7.09994 -4.38548,-10.03508c-1.16274,-1.17484 -1.81582,-2.7687 -1.81582,-4.4311l0,-6.26776c0,-2.27919 -1.21507,-4.37432 -3.18979,-5.47671c-2.78477,-1.55666 -6.74584,-3.73207 -9.45891,-5.11251c-2.22471,-1.13176 -4.28277,-2.5729 -6.13346,-4.25879l-0.15503,-0.14098c-1.32339,-1.20715 -2.49854,-2.57055 -3.49985,-4.06103c-1.81775,-2.69625 -4.77887,-7.13127 -6.70321,-10.01354c3.96689,-8.90919 11.11582,-16.06396 19.99917,-19.95072l4.65291,2.35164c2.06193,1.04169 4.48818,-0.47189 4.48818,-2.80199l0,-2.21261c1.54838,-0.25259 3.1239,-0.41315 4.72655,-0.47385l5.48427,5.54132c1.21119,1.22379 1.21119,3.20731 0,4.4311l-0.90888,0.91637l-2.00379,2.02464c-0.60463,0.61092 -0.60463,1.60365 0,2.21457l0.90888,0.91833c0.60463,0.61092 0.60463,1.60365 0,2.21457l-1.55032,1.56645c-0.29107,0.29351 -0.68563,0.45838 -1.09685,0.45819l-1.74218,0c-0.40308,0 -0.79066,0.1586 -1.08135,0.44448l-1.9224,1.88953c-0.48351,0.47581 -0.60734,1.21263 -0.30619,1.82296l3.02119,6.1072c0.51548,1.04169 -0.23449,2.26744 -1.3856,2.26744l-1.09298,0c-0.37402,0 -0.73447,-0.13706 -1.01546,-0.38378l-1.79837,-1.5782c-0.82787,-0.72566 -1.97337,-0.95651 -3.01344,-0.607l-6.04045,2.03443c-0.9457,0.31858 -1.58365,1.21302 -1.58327,2.22045c0,0.887 0.4961,1.69568 1.28095,2.09317l2.1472,1.08477c1.82357,0.92225 3.83511,1.40197 5.87379,1.40197c2.03867,0 4.37772,5.34356 6.20129,6.26581l12.93551,0c1.64528,0 3.2208,0.65987 4.38548,1.83471l2.65299,2.68059c1.10829,1.12021 1.73074,2.63947 1.73055,4.22355c-0.00078,2.42428 -0.95771,4.74811 -2.6588,6.4577zm16.80356,-17.88692c-1.12205,-0.28392 -2.10069,-0.97903 -2.74213,-1.95219l-3.48435,-5.2809c-1.04259,-1.57781 -1.04259,-3.63456 0,-5.21237l3.79635,-5.75279c0.44959,-0.67945 1.06585,-1.23162 1.79062,-1.59582l2.5154,-1.27078c2.62005,5.27111 4.13161,11.20013 4.13161,17.49139c0,1.69764 -0.1434,3.36004 -0.3527,5.0009l-5.6548,-1.42743z" fill="#000000" id="shape0" stroke="#000000" stroke-linecap="square" stroke-linejoin="bevel" stroke-opacity="0" stroke-width="0"/>';
+const TILES_URL_OPENSTREETMAP = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const SEARCH_RESULT_MARKER = { prefix: 'fas', icon: 'fa-search', markerColor: 'blue' };
+const LAT_LIMITS = [-90, 90];
+const LNG_LIMITS = [-180, 180];
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function createCommonjsModule(fn) {
@@ -14124,28 +14132,22 @@ var leafletSrc = createCommonjsModule(function (module, exports) {
 
 });
 
-const MAP_VIEW_NAME = 'map';
-// SVG editor used: https://svgedit.netlify.app/editor/index.html
-const RIBBON_ICON = '<path fill="currentColor" stroke="currentColor" d="m50.06001,1.76c-26.54347,0 -48.06001,21.74039 -48.06001,48.56c0,26.81961 21.51654,48.56 48.06001,48.56c26.54347,0 48.06001,-21.74039 48.06001,-48.56c0,-26.81961 -21.51654,-48.56 -48.06001,-48.56zm15.94701,70.02039c-0.75578,0.75973 -1.54838,1.55666 -2.19177,2.2087c-0.57943,0.58742 -0.98833,1.3119 -1.19569,2.09709c-0.29262,1.10826 -0.52905,2.22828 -0.92438,3.30325l-3.37001,9.17353c-2.66656,0.58742 -5.42613,0.91833 -8.26516,0.91833l0,-5.36118c0.32751,-2.47108 -1.48056,-7.09994 -4.38548,-10.03508c-1.16274,-1.17484 -1.81582,-2.7687 -1.81582,-4.4311l0,-6.26776c0,-2.27919 -1.21507,-4.37432 -3.18979,-5.47671c-2.78477,-1.55666 -6.74584,-3.73207 -9.45891,-5.11251c-2.22471,-1.13176 -4.28277,-2.5729 -6.13346,-4.25879l-0.15503,-0.14098c-1.32339,-1.20715 -2.49854,-2.57055 -3.49985,-4.06103c-1.81775,-2.69625 -4.77887,-7.13127 -6.70321,-10.01354c3.96689,-8.90919 11.11582,-16.06396 19.99917,-19.95072l4.65291,2.35164c2.06193,1.04169 4.48818,-0.47189 4.48818,-2.80199l0,-2.21261c1.54838,-0.25259 3.1239,-0.41315 4.72655,-0.47385l5.48427,5.54132c1.21119,1.22379 1.21119,3.20731 0,4.4311l-0.90888,0.91637l-2.00379,2.02464c-0.60463,0.61092 -0.60463,1.60365 0,2.21457l0.90888,0.91833c0.60463,0.61092 0.60463,1.60365 0,2.21457l-1.55032,1.56645c-0.29107,0.29351 -0.68563,0.45838 -1.09685,0.45819l-1.74218,0c-0.40308,0 -0.79066,0.1586 -1.08135,0.44448l-1.9224,1.88953c-0.48351,0.47581 -0.60734,1.21263 -0.30619,1.82296l3.02119,6.1072c0.51548,1.04169 -0.23449,2.26744 -1.3856,2.26744l-1.09298,0c-0.37402,0 -0.73447,-0.13706 -1.01546,-0.38378l-1.79837,-1.5782c-0.82787,-0.72566 -1.97337,-0.95651 -3.01344,-0.607l-6.04045,2.03443c-0.9457,0.31858 -1.58365,1.21302 -1.58327,2.22045c0,0.887 0.4961,1.69568 1.28095,2.09317l2.1472,1.08477c1.82357,0.92225 3.83511,1.40197 5.87379,1.40197c2.03867,0 4.37772,5.34356 6.20129,6.26581l12.93551,0c1.64528,0 3.2208,0.65987 4.38548,1.83471l2.65299,2.68059c1.10829,1.12021 1.73074,2.63947 1.73055,4.22355c-0.00078,2.42428 -0.95771,4.74811 -2.6588,6.4577zm16.80356,-17.88692c-1.12205,-0.28392 -2.10069,-0.97903 -2.74213,-1.95219l-3.48435,-5.2809c-1.04259,-1.57781 -1.04259,-3.63456 0,-5.21237l3.79635,-5.75279c0.44959,-0.67945 1.06585,-1.23162 1.79062,-1.59582l2.5154,-1.27078c2.62005,5.27111 4.13161,11.20013 4.13161,17.49139c0,1.69764 -0.1434,3.36004 -0.3527,5.0009l-5.6548,-1.42743z" fill="#000000" id="shape0" stroke="#000000" stroke-linecap="square" stroke-linejoin="bevel" stroke-opacity="0" stroke-width="0"/>';
-const TILES_URL_OPENSTREETMAP = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-const SEARCH_RESULT_MARKER = { prefix: 'fas', icon: 'fa-search', markerColor: 'blue' };
-const DEFAULT_ZOOM = 1.0;
-const DEFAULT_CENTER = new leafletSrc.LatLng(40.44694705960048, -180.70312500000003);
-const DEFAULT_TAGS = [];
-const LAT_LIMITS = [-90, 90];
-const LNG_LIMITS = [-180, 180];
-
 function e(){return (e=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var r=arguments[e];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(t[n]=r[n]);}return t}).apply(this,arguments)}function r(t,e){t.prototype=Object.create(e.prototype),t.prototype.constructor=t,t.__proto__=e;}function n(t,e){return (n=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function o(){if("undefined"==typeof Reflect||!Reflect.construct)return !1;if(Reflect.construct.sham)return !1;if("function"==typeof Proxy)return !0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],function(){})),!0}catch(t){return !1}}function i(t,e,r){return (i=o()?Reflect.construct:function(t,e,r){var o=[null];o.push.apply(o,e);var i=new(Function.bind.apply(t,o));return r&&n(i,r.prototype),i}).apply(null,arguments)}function s(t,e,r,n){void 0===e&&(e=""),void 0===n&&(n={});var o=document.createElement(t);return e&&(o.className=e),Object.keys(n).forEach(function(t){if("function"==typeof n[t]){var e=0===t.indexOf("on")?t.substr(2).toLowerCase():t;o.addEventListener(e,n[t]);}else "html"===t?o.innerHTML=n[t]:"text"===t?o.innerText=n[t]:o.setAttribute(t,n[t]);}),r&&r.appendChild(o),o}function a(t){t.preventDefault(),t.stopPropagation();}var u=function(){for(var t=arguments.length,e=new Array(t),r=0;r<t;r++)e[r]=arguments[r];return e.filter(Boolean).join(" ").trim()};function c(t,e){t&&t.classList&&(Array.isArray(e)?e:[e]).forEach(function(e){t.classList.contains(e)||t.classList.add(e);});}function l(t,e){t&&t.classList&&(Array.isArray(e)?e:[e]).forEach(function(e){t.classList.contains(e)&&t.classList.remove(e);});}var h,p=13,f=40,d=38,m=[p,27,f,d,37,39],v=function(){function t(t){var e=this,r=t.handleSubmit,n=t.searchLabel,o=t.classNames,i=void 0===o?{}:o;this.hasError=!1,this.container=s("div",u("geosearch",i.container)),this.form=s("form",["",i.form].join(" "),this.container,{autocomplete:"none",onClick:a,onDblClick:a,touchStart:a,touchEnd:a}),this.input=s("input",["glass",i.input].join(" "),this.form,{type:"text",placeholder:n||"search",onInput:this.onInput,onKeyUp:function(t){return e.onKeyUp(t)},onKeyPress:function(t){return e.onKeyPress(t)},onFocus:this.onFocus,onBlur:this.onBlur,onClick:function(){e.input.focus(),e.input.dispatchEvent(new Event("focus"));}}),this.handleSubmit=r;}var e=t.prototype;return e.onFocus=function(){c(this.form,"active");},e.onBlur=function(){l(this.form,"active");},e.onSubmit=function(t){try{var e=this;return a(t),l(r=e.container,"error"),c(r,"pending"),Promise.resolve(e.handleSubmit({query:e.input.value})).then(function(){l(e.container,"pending");})}catch(t){return Promise.reject(t)}var r;},e.onInput=function(){this.hasError&&(l(this.container,"error"),this.hasError=!1);},e.onKeyUp=function(t){27===t.keyCode&&(l(this.container,["pending","active"]),this.input.value="",document.body.focus(),document.body.blur());},e.onKeyPress=function(t){t.keyCode===p&&this.onSubmit(t);},e.setQuery=function(t){this.input.value=t;},t}(),y=function(){function t(t){var e=this,r=t.handleClick,n=t.classNames,o=void 0===n?{}:n;this.selected=-1,this.results=[],this.onClick=function(t){if("function"==typeof e.handleClick){var r=t.target;if(r&&e.container.contains(r)&&r.hasAttribute("data-key")){var n=Number(r.getAttribute("data-key"));e.clear(),e.handleClick({result:e.results[n]});}}},this.handleClick=r,this.container=s("div",u("results",o.container)),this.container.addEventListener("click",this.onClick,!0),this.resultItem=s("div",u(o.item));}var e=t.prototype;return e.render=function(t,e){var r=this;void 0===t&&(t=[]),this.clear(),t.forEach(function(t,n){var o=r.resultItem.cloneNode(!0);o.setAttribute("data-key",""+n),o.innerHTML=e({result:t}),r.container.appendChild(o);}),t.length>0&&(c(this.container.parentElement,"open"),c(this.container,"active")),this.results=t;},e.select=function(t){return Array.from(this.container.children).forEach(function(e,r){return r===t?c(e,"active"):l(e,"active")}),this.selected=t,this.results[t]},e.count=function(){return this.results?this.results.length:0},e.clear=function(){for(this.selected=-1;this.container.lastChild;)this.container.removeChild(this.container.lastChild);l(this.container.parentElement,"open"),l(this.container,"active");},t}(),g={position:"topleft",style:"button",showMarker:!0,showPopup:!1,popupFormat:function(t){return ""+t.result.label},resultFormat:function(t){return ""+t.result.label},marker:{icon:leafletSrc&&leafletSrc.Icon?new leafletSrc.Icon.Default:void 0,draggable:!1},maxMarkers:1,maxSuggestions:5,retainZoomLevel:!1,animateZoom:!0,searchLabel:"Enter address",notFoundMessage:"Sorry, that address could not be found.",messageHideDelay:3e3,zoomLevel:18,classNames:{container:"leaflet-bar leaflet-control leaflet-control-geosearch",button:"leaflet-bar-part leaflet-bar-part-single",resetButton:"reset",msgbox:"leaflet-bar message",form:"",input:""},autoComplete:!0,autoCompleteDelay:250,autoClose:!1,keepResult:!1,updateMap:!0},b="Leaflet must be loaded before instantiating the GeoSearch control",E={options:e({},g),classNames:e({},g.classNames),initialize:function(r){var n,o,i,a,u=this;if(!leafletSrc)throw new Error(b);if(!r.provider)throw new Error("Provider is missing from options");this.options=e({},this.options,{},r),this.classNames=e({},this.classNames,{},r.classNames),this.markers=new leafletSrc.FeatureGroup,this.classNames.container+=" leaflet-geosearch-"+this.options.style,this.searchElement=new v({searchLabel:this.options.searchLabel,classNames:{container:this.classNames.container,form:this.classNames.form,input:this.classNames.input},handleSubmit:function(t){return u.onSubmit(t)}}),this.button=s("a",this.classNames.button,this.searchElement.container,{title:this.options.searchLabel,href:"#",onClick:function(t){return u.onClick(t)}}),leafletSrc.DomEvent.disableClickPropagation(this.button),this.resetButton=s("a",this.classNames.resetButton,this.searchElement.form,{text:"×",href:"#",onClick:function(){return u.clearResults(null,!0)}}),leafletSrc.DomEvent.disableClickPropagation(this.resetButton),this.options.autoComplete&&(this.resultList=new y({handleClick:function(t){var e=t.result;u.searchElement.input.value=e.label,u.onSubmit({query:e.label,data:e});}}),this.searchElement.form.appendChild(this.resultList.container),this.searchElement.input.addEventListener("keyup",(n=function(t){return u.autoSearch(t)},void 0===(o=this.options.autoCompleteDelay)&&(o=250),void 0===i&&(i=!1),function(){for(var t=arguments.length,e=new Array(t),r=0;r<t;r++)e[r]=arguments[r];a&&clearTimeout(a),a=setTimeout(function(){a=null,i||n.apply(void 0,e);},o),i&&!a&&n.apply(void 0,e);}),!0),this.searchElement.input.addEventListener("keydown",function(t){return u.selectResult(t)},!0),this.searchElement.input.addEventListener("keydown",function(t){return u.clearResults(t,!0)},!0)),this.searchElement.form.addEventListener("click",function(t){t.preventDefault();},!1);},onAdd:function(e){var r=this.options,n=r.showMarker,o=r.style;if(this.map=e,n&&this.markers.addTo(e),"bar"===o){var i=e.getContainer().querySelector(".leaflet-control-container");this.container=s("div","leaflet-control-geosearch leaflet-geosearch-bar"),this.container.appendChild(this.searchElement.form),i.appendChild(this.container);}return leafletSrc.DomEvent.disableClickPropagation(this.searchElement.form),this.searchElement.container},onRemove:function(){var t;return null==(t=this.container)||t.remove(),this},onClick:function(t){t.preventDefault(),t.stopPropagation();var e=this.searchElement,r=e.container,n=e.input;r.classList.contains("active")?(l(r,"active"),this.clearResults()):(c(r,"active"),n.focus());},selectResult:function(t){if(-1!==[p,f,d].indexOf(t.keyCode))if(t.preventDefault(),t.keyCode!==p){var e=this.resultList.count()-1;if(!(e<0)){var r=this.resultList.selected,n=t.keyCode===f?r+1:r-1,o=this.resultList.select(n<0?e:n>e?0:n);this.searchElement.input.value=o.label;}}else {var i=this.resultList.select(this.resultList.selected);this.onSubmit({query:this.searchElement.input.value,data:i});}},clearResults:function(t,e){if(void 0===e&&(e=!1),!t||27===t.keyCode){var r=this.options,n=r.autoComplete;!e&&r.keepResult||(this.searchElement.input.value="",this.markers.clearLayers()),n&&this.resultList.clear();}},autoSearch:function(t){try{var e=this;if(m.indexOf(t.keyCode)>-1)return Promise.resolve();var r=t.target.value,n=e.options.provider,o=function(){if(r.length)return Promise.resolve(n.search({query:r})).then(function(t){t=t.slice(0,e.options.maxSuggestions),e.resultList.render(t,e.options.resultFormat);});e.resultList.clear();}();return Promise.resolve(o&&o.then?o.then(function(){}):void 0)}catch(t){return Promise.reject(t)}},onSubmit:function(t){try{var e=this;return Promise.resolve(e.options.provider.search(t)).then(function(r){r&&r.length>0&&e.showResult(r[0],t);})}catch(t){return Promise.reject(t)}},showResult:function(t,e){var r=this.options,n=r.autoClose,o=r.updateMap,i=this.markers.getLayers();i.length>=this.options.maxMarkers&&this.markers.removeLayer(i[0]);var s=this.addMarker(t,e);o&&this.centerMap(t),this.map.fireEvent("geosearch/showlocation",{location:t,marker:s}),n&&this.closeResults();},closeResults:function(){var t=this.searchElement.container;t.classList.contains("active")&&l(t,"active"),this.clearResults();},addMarker:function(e,r){var n=this,o=this.options,i=o.marker,s=o.showPopup,a=o.popupFormat,u=new leafletSrc.Marker([e.y,e.x],i),c=e.label;return "function"==typeof a&&(c=a({query:r,result:e})),u.bindPopup(c),this.markers.addLayer(u),s&&u.openPopup(),i.draggable&&u.on("dragend",function(t){n.map.fireEvent("geosearch/marker/dragend",{location:u.getLatLng(),event:t});}),u},centerMap:function(e){var r=this.options,n=r.retainZoomLevel,o=r.animateZoom,i=e.bounds?new leafletSrc.LatLngBounds(e.bounds):new leafletSrc.LatLng(e.y,e.x).toBounds(10),s=i.isValid()?i:this.markers.getBounds();!n&&i.isValid()&&!e.bounds||n||!i.isValid()?this.map.setView(s.getCenter(),this.getZoom(),{animate:o}):this.map.fitBounds(s,{animate:o});},getZoom:function(){var t=this.options,e=t.zoomLevel;return t.retainZoomLevel?this.map.getZoom():e}};function x(){if(!leafletSrc)throw new Error(b);for(var e=leafletSrc.Control.extend(E),r=arguments.length,n=new Array(r),o=0;o<r;o++)n[o]=arguments[o];return i(e,n)}!function(t){t[t.SEARCH=0]="SEARCH",t[t.REVERSE=1]="REVERSE";}(h||(h={}));var L$1=function(){function t(t){void 0===t&&(t={}),this.options=t;}var r=t.prototype;return r.getParamString=function(t){void 0===t&&(t={});var r=e({},this.options.params,{},t);return Object.keys(r).map(function(t){return encodeURIComponent(t)+"="+encodeURIComponent(r[t])}).join("&")},r.getUrl=function(t,e){return t+"?"+this.getParamString(e)},r.search=function(t){try{var e=this,r=e.endpoint({query:t.query,type:h.SEARCH});return Promise.resolve(fetch(r)).then(function(t){return Promise.resolve(t.json()).then(function(t){return e.parse({data:t})})})}catch(t){return Promise.reject(t)}},t}();(function(t){function n(){return t.apply(this,arguments)||this}r(n,t);var o=n.prototype;return o.endpoint=function(){return "https://places-dsn.algolia.net/1/places/query"},o.findBestMatchLevelIndex=function(t){var e=t.find(function(t){return "full"===t.matchLevel})||t.find(function(t){return "partial"===t.matchLevel});return e?t.indexOf(e):0},o.getLabel=function(t){var e,r,n,o;return [null==(e=t.locale_names)?void 0:e.default[this.findBestMatchLevelIndex(t._highlightResult.locale_names.default)],null==(r=t.city)?void 0:r.default[this.findBestMatchLevelIndex(t._highlightResult.city.default)],t.administrative[this.findBestMatchLevelIndex(t._highlightResult.administrative)],null==(n=t.postcode)?void 0:n[this.findBestMatchLevelIndex(t._highlightResult.postcode)],null==(o=t.country)?void 0:o.default].filter(Boolean).join(", ")},o.parse=function(t){var e=this;return t.data.hits.map(function(t){return {x:t._geoloc.lng,y:t._geoloc.lat,label:e.getLabel(t),bounds:null,raw:t}})},o.search=function(t){var r=t.query;try{var n=this,o="string"==typeof r?{query:r}:r;return Promise.resolve(fetch(n.endpoint(),{method:"POST",body:JSON.stringify(e({},n.options.params,{},o))})).then(function(t){return Promise.resolve(t.json()).then(function(t){return n.parse({data:t})})})}catch(t){return Promise.reject(t)}},n})(L$1);(function(t){function e(){var e;return (e=t.apply(this,arguments)||this).searchUrl="https://dev.virtualearth.net/REST/v1/Locations",e}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query,r="string"==typeof e?{q:e}:e;return r.jsonp=t.jsonp,this.getUrl(this.searchUrl,r)},n.parse=function(t){return 0===t.data.resourceSets.length?[]:t.data.resourceSets[0].resources.map(function(t){return {x:t.point.coordinates[1],y:t.point.coordinates[0],label:t.address.formattedAddress,bounds:[[t.bbox[0],t.bbox[1]],[t.bbox[2],t.bbox[3]]],raw:t}})},n.search=function(t){var e,r,n,o=t.query;try{var i=this,a="BING_JSONP_CB_"+Date.now();return Promise.resolve((e=i.endpoint({query:o,jsonp:a}),r=a,n=s("script",null,document.body),n.setAttribute("type","text/javascript"),new Promise(function(t){window[r]=function(e){n.remove(),delete window[r],t(e);},n.setAttribute("src",e);}))).then(function(t){return i.parse({data:t})})}catch(t){return Promise.reject(t)}},e})(L$1);(function(t){function e(){var e;return (e=t.apply(this,arguments)||this).searchUrl="https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find",e}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query,r="string"==typeof e?{text:e}:e;return r.f="json",this.getUrl(this.searchUrl,r)},n.parse=function(t){return t.data.locations.map(function(t){return {x:t.feature.geometry.x,y:t.feature.geometry.y,label:t.name,bounds:[[t.extent.ymin,t.extent.xmin],[t.extent.ymax,t.extent.xmax]],raw:t}})},e})(L$1);var P=function(t){function e(){var e;return (e=t.apply(this,arguments)||this).searchUrl="https://maps.googleapis.com/maps/api/geocode/json",e}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query;return this.getUrl(this.searchUrl,"string"==typeof e?{address:e}:e)},n.parse=function(t){return t.data.results.map(function(t){return {x:t.geometry.location.lng,y:t.geometry.location.lat,label:t.formatted_address,bounds:[[t.geometry.viewport.southwest.lat,t.geometry.viewport.southwest.lng],[t.geometry.viewport.northeast.lat,t.geometry.viewport.northeast.lng]],raw:t}})},e}(L$1);(function(t){function e(){var e;return (e=t.apply(this,arguments)||this).searchUrl="https://geocode.search.hereapi.com/v1/geocode",e}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query;return this.getUrl(this.searchUrl,"string"==typeof e?{q:e}:e)},n.parse=function(t){return t.data.items.map(function(t){return {x:t.position.lng,y:t.position.lat,label:t.address.label,bounds:null,raw:t}})},e})(L$1);var S=function(t){function e(e){var r;void 0===e&&(e={});var n="https://nominatim.openstreetmap.org";return (r=t.call(this,e)||this).searchUrl=e.searchUrl||n+"/search",r.reverseUrl=e.reverseUrl||n+"/reverse",r}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query,r=t.type,n="string"==typeof e?{q:e}:e;switch(n.format="json",r){case h.REVERSE:return this.getUrl(this.reverseUrl,n);default:return this.getUrl(this.searchUrl,n)}},n.parse=function(t){return (Array.isArray(t.data)?t.data:[t.data]).map(function(t){return {x:Number(t.lon),y:Number(t.lat),label:t.display_name,bounds:[[parseFloat(t.boundingbox[0]),parseFloat(t.boundingbox[2])],[parseFloat(t.boundingbox[1]),parseFloat(t.boundingbox[3])]],raw:t}})},e}(L$1);(function(t){function n(r){return t.call(this,e({},r,{searchUrl:"https://locationiq.org/v1/search.php",reverseUrl:"https://locationiq.org/v1/reverse.php"}))||this}return r(n,t),n})(S);(function(t){function e(){var e;return (e=t.apply(this,arguments)||this).searchUrl="https://api.opencagedata.com/geocode/v1/json",e}r(e,t);var n=e.prototype;return n.endpoint=function(t){var e=t.query,r="string"==typeof e?{q:e}:e;return r.format="json",this.getUrl(this.searchUrl,r)},n.parse=function(t){return t.data.results.map(function(t){return {x:t.geometry.lng,y:t.geometry.lat,label:t.formatted,bounds:[[t.bounds.southwest.lat,t.bounds.southwest.lng],[t.bounds.northeast.lat,t.bounds.northeast.lng]],raw:t}})},n.search=function(e){try{return Promise.resolve(e.query.length<2?[]:t.prototype.search.call(this,e))}catch(t){return Promise.reject(t)}},e})(L$1);(function(t){function e(e){var r;return void 0===e&&(e={}),(r=t.call(this,e)||this).searchUrl=e.searchUrl||"https://a.tiles.mapbox.com/v4/geocode/mapbox.places/",r}r(e,t);var n=e.prototype;return n.endpoint=function(t){return this.getUrl(""+this.searchUrl+t.query+".json")},n.parse=function(t){return (Array.isArray(t.data.features)?t.data.features:[]).map(function(t){var e=null;return t.bbox&&(e=[[parseFloat(t.bbox[1]),parseFloat(t.bbox[0])],[parseFloat(t.bbox[3]),parseFloat(t.bbox[2])]]),{x:Number(t.center[0]),y:Number(t.center[1]),label:t.place_name?t.place_name:t.text,bounds:e,raw:t}})},e})(L$1);
 
-function formatWithTemplates(s) {
+function formatWithTemplates(s, query = '') {
     const datePattern = /{{date:([a-zA-Z\-\/\.\:]*)}}/g;
+    const queryPattern = /{{query}}/g;
     const replaced = s.replace(datePattern, (_, pattern) => {
         // @ts-ignore
         return moment().format(pattern);
-    });
+    }).replace(queryPattern, query);
     return replaced;
 }
 const CURSOR = '$CURSOR$';
+function sanitizeFileName(s) {
+    const illegalChars = /[\/\?<>\\:\*\|":]/g;
+    return s.replace(illegalChars, '-');
+}
 function newNote(app, newNoteType, directory, fileName, location, templatePath) {
     return __awaiter(this, void 0, void 0, function* () {
         // `$CURSOR$` is used to set the cursor
@@ -14155,7 +14157,7 @@ function newNote(app, newNoteType, directory, fileName, location, templatePath) 
         let templateContent = '';
         if (templatePath)
             templateContent = yield app.vault.adapter.read(templatePath);
-        let fullName = path__namespace.join(directory || '', fileName);
+        let fullName = sanitizeFileName(path__namespace.join(directory || '', fileName));
         if (yield app.vault.adapter.exists(fullName + '.md'))
             fullName += Math.random() * 1000;
         try {
@@ -14171,7 +14173,8 @@ function goToEditorLocation(editor, fileLocation, highlight) {
         if (fileLocation) {
             let pos = editor.offsetToPos(fileLocation);
             if (highlight) {
-                editor.setSelection({ ch: 0, line: pos.line }, { ch: 1000, line: pos.line });
+                const lineContent = editor.getLine(pos.line);
+                editor.setSelection({ ch: 0, line: pos.line }, { ch: lineContent.length, line: pos.line });
             }
             else {
                 editor.setCursor(pos);
@@ -14191,23 +14194,25 @@ function handleNewNoteCursorMarker(editor) {
         }
     });
 }
-// Returns true if a replacement was made
-function verifyOrAddFrontMatter(editor) {
+// Creates or modifies a front matter that has the field `fieldName: fieldValue`.
+// Returns true if a change to the note was made.
+function verifyOrAddFrontMatter(editor, fieldName, fieldValue) {
     const content = editor.getValue();
     const frontMatterRegex = /^---(.*)^---/ms;
     const frontMatter = content.match(frontMatterRegex);
-    const locations = content.match(/^---.*locations:.*^---/ms);
+    const existingFieldRegex = new RegExp(`^---.*${fieldName}:.*^---`, 'ms');
+    const existingField = content.match(existingFieldRegex);
     const cursorLocation = editor.getCursor();
     // That's not the best usage of the API, and rather be converted to editor transactions or something else
     // that can preserve the cursor position better
-    if (frontMatter && !locations) {
-        const replaced = `---${frontMatter[1]}locations:\n---`;
+    if (frontMatter && !existingField) {
+        const replaced = `---${frontMatter[1]}${fieldName}: ${fieldValue}\n---`;
         editor.setValue(content.replace(frontMatterRegex, replaced));
         editor.setCursor({ line: cursorLocation.line + 1, ch: cursorLocation.ch });
         return true;
     }
     else if (!frontMatter) {
-        const newFrontMatter = '---\nlocations:\n---\n\n';
+        const newFrontMatter = `---\n${fieldName}: ${fieldValue}\n---\n\n`;
         editor.setValue(newFrontMatter + content);
         editor.setCursor({ line: cursorLocation.line + newFrontMatter.split('\n').length - 1, ch: cursorLocation.ch });
         return true;
@@ -14226,6 +14231,21 @@ function populateOpenInItems(menu, location, settings) {
             });
         });
     }
+}
+function findOpenMapView(app) {
+    const maps = app.workspace.getLeavesOfType(MAP_VIEW_NAME);
+    if (maps && maps.length > 0)
+        return maps[0].view;
+}
+function getEditor(app, leafToUse) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let view = leafToUse && leafToUse.view instanceof obsidian.MarkdownView ?
+            leafToUse.view :
+            app.workspace.getActiveViewOfType(obsidian.MarkdownView);
+        if (view)
+            return view.editor;
+        return null;
+    });
 }
 
 class LocationSuggest extends obsidian.EditorSuggest {
@@ -14269,7 +14289,7 @@ class LocationSuggest extends obsidian.EditorSuggest {
         const linkOfCursor = this.getGeolinkOfCursor(currentCursor, value.context.editor);
         const finalResult = `[${value.context.query}](geo:${value.location.lat},${value.location.lng})`;
         value.context.editor.replaceRange(finalResult, { line: currentCursor.line, ch: linkOfCursor.index }, { line: currentCursor.line, ch: linkOfCursor.linkEnd });
-        if (verifyOrAddFrontMatter(value.context.editor))
+        if (verifyOrAddFrontMatter(value.context.editor, 'locations', ''))
             new obsidian.Notice("The note's front matter was updated to denote locations are present");
     }
     getGeolinkOfCursor(cursor, editor) {
@@ -14311,7 +14331,7 @@ class LocationSuggest extends obsidian.EditorSuggest {
                 const firstResult = results[0];
                 editor.replaceSelection(`[${selection}](geo:${firstResult.y},${firstResult.x})`);
                 new obsidian.Notice(firstResult.label, 10 * 1000);
-                if (verifyOrAddFrontMatter(editor))
+                if (verifyOrAddFrontMatter(editor, 'locations', ''))
                     new obsidian.Notice("The note's front matter was updated to denote locations are present");
             }
             else {
@@ -14339,7 +14359,8 @@ class UrlConvertor {
                     return {
                         location: new leafletSrc.LatLng(parseFloat(result[1]), parseFloat(result[2])),
                         index: result.index,
-                        matchLength: result[0].length
+                        matchLength: result[0].length,
+                        ruleName: rule.name
                     };
                 }
                 catch (e) { }
@@ -14358,7 +14379,7 @@ class UrlConvertor {
         // We want to put the cursor right after the beginning of the newly-inserted link
         const newCursorPos = replaceStart ? replaceStart.ch + 1 : cursor.ch + 1;
         editor.setCursor({ line: cursor.line, ch: newCursorPos });
-        verifyOrAddFrontMatter(editor);
+        verifyOrAddFrontMatter(editor, 'locations', '');
     }
     convertUrlAtCursorToGeolocation(editor) {
         const cursor = editor.getCursor();
@@ -17286,7 +17307,39 @@ createCommonjsModule(function (module, exports) {
 
 });
 
+function mergeStates(state1, state2) {
+    // Overwrite an existing state with a new one, that may have null or partial values which need to be ignored
+    // and taken from the existing state
+    const clearedState = Object.fromEntries(Object.entries(state2).filter(([_, value]) => value != null));
+    return Object.assign(Object.assign({}, state1), clearedState);
+}
+const xor = (a, b) => (a && !b) || (!a && b);
+function areStatesEqual(state1, state2) {
+    if (!state1 || !state2)
+        return false;
+    if (xor(state1.mapCenter, state2.mapCenter))
+        return false;
+    if (state1.mapCenter) {
+        // To compare locations we need to construct an actual LatLng object because state1 may just
+        // be a simple dict and not an actual LatLng
+        const mapCenter1 = new leafletSrc.LatLng(state1.mapCenter.lat, state1.mapCenter.lng);
+        const mapCenter2 = new leafletSrc.LatLng(state2.mapCenter.lat, state2.mapCenter.lng);
+        if (mapCenter1.distanceTo(mapCenter2) > 1000)
+            return false;
+    }
+    return JSON.stringify(state1.tags) == JSON.stringify(state2.tags) &&
+        state2.mapZoom == state2.mapZoom &&
+        state1.chosenMapSource == state2.chosenMapSource;
+}
 const DEFAULT_SETTINGS = {
+    defaultState: {
+        name: 'Default',
+        mapZoom: 1.0,
+        mapCenter: new leafletSrc.LatLng(40.44694705960048, -180.70312500000003),
+        tags: [],
+        chosenMapSource: 0
+    },
+    savedStates: [],
     markerIconRules: [
         { ruleName: "default", preset: true, iconDetails: { "prefix": "fas", "icon": "fa-circle", "markerColor": "blue" } },
         { ruleName: "#trip", preset: false, iconDetails: { "prefix": "fas", "icon": "fa-hiking", "markerColor": "green" } },
@@ -17305,7 +17358,7 @@ const DEFAULT_SETTINGS = {
         { name: 'Google Maps', regExp: /https:\/\/\S*\@([0-9\.\-]+),([0-9\.\-]+)\S*/.source, order: 'latFirst', preset: true },
         { name: 'OpenStreetMap Show Address', regExp: /https:\/\/www.openstreetmap.org\S*query=([0-9\.\-]+%2C[0-9\.\-]+)\S*/.source, order: 'latFirst', preset: true }
     ],
-    mapControls: { filtersDisplayed: true, viewDisplayed: true },
+    mapControls: { filtersDisplayed: true, viewDisplayed: true, presetsDisplayed: false },
     maxClusterRadiusPixels: 20,
     searchProvider: 'osm',
     mapSources: [{ name: 'OpenStreetMap', urlLight: TILES_URL_OPENSTREETMAP }],
@@ -17327,6 +17380,21 @@ function convertLegacyTilesUrl(settings) {
     if (settings.tilesUrl) {
         settings.mapSources = [{ name: 'Default', urlLight: settings.tilesUrl }];
         settings.tilesUrl = null;
+        return true;
+    }
+    return false;
+}
+function convertLegacyDefaultState(settings) {
+    var _a;
+    if (settings.defaultTags || settings.defaultZoom || settings.defaultMapCenter || settings.chosenMapSource) {
+        settings.defaultState = {
+            name: 'Default',
+            mapZoom: settings.defaultZoom || DEFAULT_SETTINGS.defaultState.mapZoom,
+            mapCenter: settings.defaultMapCenter || DEFAULT_SETTINGS.defaultState.mapCenter,
+            tags: settings.defaultTags || DEFAULT_SETTINGS.defaultState.tags,
+            chosenMapSource: (_a = settings.chosenMapSource) !== null && _a !== void 0 ? _a : DEFAULT_SETTINGS.defaultState.chosenMapSource
+        };
+        settings.defaultTags = settings.defaultZoom = settings.defaultMapCenter = settings.chosenMapSource = null;
         return true;
     }
     return false;
@@ -17718,7 +17786,7 @@ function matchInlineLocation(content) {
     // Old syntax of ` `location: ... ` `. This syntax doesn't support a name so we leave an empty capture group
     const locationRegex1 = /\`()location:\s*\[?([0-9.\-]+)\s*,\s*([0-9.\-]+)\]?\`/g;
     // New syntax of `[name](geo:...)` and an optional tags as `tag:tagName` separated by whitespaces
-    const locationRegex2 = /\[(.*?)\]\(geo:([0-9.\-]+),([0-9.\-]+)\)[ \t]*((?:tag:[\w\/\-]+\s+)*)/g;
+    const locationRegex2 = /\[(.*?)\]\(geo:([0-9.\-]+),([0-9.\-]+)\)[ \t]*((?:tag:[\w\/\-]+[\s\.]+)*)/g;
     const matches1 = content.matchAll(locationRegex1);
     const matches2 = content.matchAll(locationRegex2);
     return Array.from(matches1).concat(Array.from(matches2));
@@ -17818,6 +17886,324 @@ function getFrontMatterLocation(file, app) {
     return null;
 }
 
+class NewPresetDialog extends obsidian.Modal {
+    constructor(app, stateToSave, plugin, settings, callback) {
+        super(app);
+        this.plugin = plugin;
+        this.settings = settings;
+        this.stateToSave = stateToSave;
+        this.callback = callback;
+    }
+    onOpen() {
+        let statusLabel = null;
+        const grid = this.contentEl.createDiv({ cls: 'newPresetDialogGrid' });
+        const row1 = grid.createDiv({ cls: 'newPresetDialogLine' });
+        const row2 = grid.createDiv({ cls: 'newPresetDialogLine' });
+        const row3 = grid.createDiv({ cls: 'newPresetDialogLine' });
+        let name = new obsidian.TextComponent(row1)
+            .onChange(value => {
+            if (value == 'Default' || value.length === 0)
+                saveButton.disabled = true;
+            else
+                saveButton.disabled = false;
+            if (this.findPresetByName(value))
+                statusLabel.setText("Clicking 'Save' will overwrite an existing preset.");
+            else
+                statusLabel.setText('');
+        });
+        name.inputEl.style.width = '100%';
+        name.inputEl.addEventListener('keypress', (ev) => {
+            if (ev.key == 'Enter')
+                saveButton.buttonEl.click();
+        });
+        const includeMapSource = row2.createEl('input', { type: 'checkbox' });
+        includeMapSource.id = 'includeMapSource';
+        const includeMapSourceLabel = row2.createEl('label');
+        includeMapSourceLabel.setAttribute('for', 'includeMapSource');
+        includeMapSourceLabel.textContent = 'Include chosen map source';
+        let saveButton = new obsidian.ButtonComponent(row3)
+            .setButtonText('Save')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            let existingPreset = this.findPresetByName(name.getValue());
+            let newState = Object.assign(Object.assign({}, this.stateToSave), { name: name.getValue() });
+            if (!includeMapSource.checked)
+                newState.chosenMapSource = undefined;
+            if (existingPreset) {
+                Object.assign(existingPreset, newState);
+                newState = existingPreset;
+            }
+            else {
+                this.settings.savedStates.push(newState);
+            }
+            yield this.plugin.saveSettings();
+            // Update the presets list
+            const presetIndex = this.settings.savedStates.indexOf(newState);
+            // Select the new preset in the view's controls
+            this.callback((presetIndex + 1).toString());
+            this.close();
+        }));
+        new obsidian.ButtonComponent(row3)
+            .setButtonText('Cancel')
+            .onClick(() => {
+            this.close();
+        });
+        statusLabel = row3.createDiv();
+        name.onChanged();
+        name.inputEl.focus();
+    }
+    findPresetByName(name) {
+        var _a;
+        return (_a = this.settings.savedStates) === null || _a === void 0 ? void 0 : _a.find(preset => preset.name === name);
+    }
+}
+
+class ViewControls {
+    constructor(parentElement, settings, app, view, plugin) {
+        this.presetsDivContent = null;
+        this.lastSelectedPresetIndex = null;
+        this.lastSelectedPreset = null;
+        this.parentElement = parentElement;
+        this.settings = settings;
+        this.app = app;
+        this.view = view;
+        this.plugin = plugin;
+    }
+    getCurrentState() {
+        return this.view.getState();
+    }
+    setNewState(newState, considerAutoFit) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.view.setViewState(newState, false, considerAutoFit);
+        });
+    }
+    setStateByNewMapSource(newSource) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Update the state assuming the controls are updated
+            const state = this.getCurrentState();
+            yield this.setNewState(Object.assign(Object.assign({}, state), { chosenMapSource: newSource }), false);
+        });
+    }
+    tryToGuessPreset() {
+        // Try to guess the preset based on the current state, and choose it in the dropdown
+        // (e.g. for when the plugin loads with a state)
+        const currentState = this.getCurrentState();
+        const states = [this.settings.defaultState, ...(this.settings.savedStates || [])];
+        for (const [index, state] of states.entries())
+            if (areStatesEqual(state, currentState)) {
+                this.presetsBox.setValue(index.toString());
+                this.lastSelectedPresetIndex = index;
+                this.lastSelectedPreset = currentState;
+                break;
+            }
+    }
+    updateControlsToState() {
+        this.setMapSourceBoxByState();
+        this.setTagsBoxByState();
+    }
+    setMapSourceBoxByState() {
+        this.mapSourceBox.setValue(this.getCurrentState().chosenMapSource.toString());
+    }
+    setStateByNewTags(newTags) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Update the state assuming the controls are updated
+            const state = this.getCurrentState();
+            yield this.setNewState(Object.assign(Object.assign({}, state), { tags: newTags }), newTags.length > 0);
+        });
+    }
+    setStateByTagString(tagListAsString) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Update the state assuming the UI is updated
+            yield this.setStateByNewTags(tagListAsString.split(',').filter(t => t.length > 0));
+        });
+    }
+    setTagsBoxByState() {
+        // Update the UI based on the state
+        const state = this.getCurrentState();
+        this.tagsBox.setValue(state.tags.join(','));
+    }
+    reload() {
+        if (this.controlsDiv)
+            this.controlsDiv.remove();
+        this.createControls();
+    }
+    createControls() {
+        var _a;
+        this.controlsDiv = createDiv({
+            'cls': 'graph-controls'
+        });
+        let filtersDiv = this.controlsDiv.createDiv({ 'cls': 'graph-control-div' });
+        filtersDiv.innerHTML = `
+			<input id="filtersCollapsible" class="toggle" type="checkbox">
+			<label for="filtersCollapsible" class="lbl-toggle">Filters</label>
+			`;
+        const filtersButton = filtersDiv.getElementsByClassName('toggle')[0];
+        filtersButton.checked = this.settings.mapControls.filtersDisplayed;
+        filtersButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+            this.settings.mapControls.filtersDisplayed = filtersButton.checked;
+            this.plugin.saveSettings();
+        });
+        let filtersContent = filtersDiv.createDiv({ 'cls': 'graph-control-content' });
+        this.tagsBox = new obsidian.TextComponent(filtersContent);
+        this.tagsBox.setPlaceholder('Tags, e.g. "#one,#two"');
+        this.tagsBox.onChange((tagsBox) => {
+            this.setStateByTagString(tagsBox);
+        });
+        let tagSuggestions = new obsidian.DropdownComponent(filtersContent);
+        tagSuggestions.setValue('Quick add tag');
+        tagSuggestions.addOption('', 'Quick add tag');
+        for (const tagName of this.getAllTagNames())
+            tagSuggestions.addOption(tagName, tagName);
+        tagSuggestions.onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            let currentTags = this.getCurrentState().tags;
+            if (currentTags.indexOf(value) < 0) {
+                const newTags = currentTags.concat(value);
+                yield this.setStateByNewTags(newTags);
+                this.setTagsBoxByState();
+            }
+            tagSuggestions.setValue('Quick add tag');
+            this.tagsBox.inputEl.focus();
+            this.tagsBox.onChanged();
+        }));
+        let viewDiv = this.controlsDiv.createDiv({ 'cls': 'graph-control-div' });
+        viewDiv.innerHTML = `
+			<input id="viewCollapsible" class="toggle" type="checkbox">
+			<label for="viewCollapsible" class="lbl-toggle">View</label>
+			`;
+        const viewButton = viewDiv.getElementsByClassName('toggle')[0];
+        viewButton.checked = this.settings.mapControls.viewDisplayed;
+        viewButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+            this.settings.mapControls.viewDisplayed = viewButton.checked;
+            this.plugin.saveSettings();
+        });
+        let viewDivContent = viewDiv.createDiv({ 'cls': 'graph-control-content' });
+        this.mapSourceBox = new obsidian.DropdownComponent(viewDivContent);
+        for (const [index, source] of this.settings.mapSources.entries()) {
+            this.mapSourceBox.addOption(index.toString(), source.name);
+        }
+        this.mapSourceBox.onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            this.setStateByNewMapSource(parseInt(value));
+        }));
+        this.setMapSourceBoxByState();
+        this.sourceMode = new obsidian.DropdownComponent(viewDivContent);
+        this.sourceMode.addOptions({ auto: 'Auto', light: 'Light', dark: 'Dark' })
+            .setValue((_a = this.settings.chosenMapMode) !== null && _a !== void 0 ? _a : 'auto')
+            .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            this.settings.chosenMapMode = value;
+            yield this.plugin.saveSettings();
+            this.view.refreshMap();
+        }));
+        let goDefault = new obsidian.ButtonComponent(viewDivContent);
+        goDefault
+            .setButtonText('Reset')
+            .setTooltip('Reset the view to the defined default.')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            this.presetsBox.setValue('0');
+            yield this.choosePresetAndUpdateState(0);
+            this.updateControlsToState();
+        }));
+        let fitButton = new obsidian.ButtonComponent(viewDivContent);
+        fitButton
+            .setButtonText('Fit')
+            .setTooltip('Set the map view to fit all currently-displayed markers.')
+            .onClick(() => this.view.autoFitMapToMarkers());
+        this.presetsDiv = this.controlsDiv.createDiv({ 'cls': 'graph-control-div' });
+        this.presetsDiv.innerHTML = `
+			<input id="presetsCollapsible" class="toggle" type="checkbox">
+			<label for="presetsCollapsible" class="lbl-toggle">Presets</label>
+			`;
+        const presetsButton = this.presetsDiv.getElementsByClassName('toggle')[0];
+        presetsButton.checked = this.settings.mapControls.presetsDisplayed;
+        presetsButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+            this.settings.mapControls.presetsDisplayed = presetsButton.checked;
+            this.plugin.saveSettings();
+        });
+        this.refreshPresets();
+        this.parentElement.append(this.controlsDiv);
+    }
+    getAllTagNames() {
+        let tags = [];
+        const allFiles = this.app.vault.getFiles();
+        for (const file of allFiles) {
+            const fileCache = this.app.metadataCache.getFileCache(file);
+            if (fileCache && fileCache.tags) {
+                const fileTagNames = obsidian.getAllTags(fileCache) || [];
+                tags = tags.concat(fileTagNames.filter(tagName => tags.indexOf(tagName) < 0));
+            }
+        }
+        tags = tags.sort();
+        return tags;
+    }
+    choosePresetAndUpdateState(chosenPresetNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Hacky code, not very happy with it... Entry 0 is the default, then 1 is assumed to be the first saved state
+            const chosenPreset = chosenPresetNumber == 0 ? this.settings.defaultState : this.settings.savedStates[chosenPresetNumber - 1];
+            this.lastSelectedPresetIndex = chosenPresetNumber;
+            this.lastSelectedPreset = mergeStates(this.getCurrentState(), chosenPreset);
+            yield this.setNewState(Object.assign({}, chosenPreset), false);
+            this.updateControlsToState();
+        });
+    }
+    refreshPresets() {
+        if (this.presetsDivContent)
+            this.presetsDivContent.remove();
+        this.presetsDivContent = this.presetsDiv.createDiv({ 'cls': 'graph-control-content' });
+        this.presetsBox = new obsidian.DropdownComponent(this.presetsDivContent);
+        const states = [this.settings.defaultState, ...(this.settings.savedStates || [])];
+        this.presetsBox.addOption('-1', '');
+        for (const [index, preset] of states.entries()) {
+            this.presetsBox.addOption(index.toString(), preset.name);
+        }
+        if (this.lastSelectedPresetIndex && this.lastSelectedPresetIndex < states.length &&
+            areStatesEqual(this.getCurrentState(), this.lastSelectedPreset))
+            this.presetsBox.setValue(this.lastSelectedPreset.toString());
+        this.presetsBox.onChange((value) => __awaiter(this, void 0, void 0, function* () {
+            const chosenPresetNumber = parseInt(value);
+            if (chosenPresetNumber == -1)
+                return;
+            yield this.choosePresetAndUpdateState(chosenPresetNumber);
+        }));
+        let savePreset = new obsidian.ButtonComponent(this.presetsDivContent);
+        savePreset
+            .setButtonText('Save as...')
+            .setTooltip('Save the current view as a preset.')
+            .onClick(() => {
+            const dialog = new NewPresetDialog(this.app, this.getCurrentState(), this.plugin, this.settings, (index) => {
+                // If a new preset was added, this small function makes sure it's selected afterwards
+                this.refreshPresets();
+                if (index)
+                    this.presetsBox.setValue(index);
+            });
+            dialog.open();
+        });
+        let deletePreset = new obsidian.ButtonComponent(this.presetsDivContent);
+        deletePreset
+            .setButtonText('Delete')
+            .setTooltip('Delete the currently-selected preset.')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            const selectionIndex = parseInt(this.presetsBox.getValue());
+            if (selectionIndex > 0) {
+                this.settings.savedStates.splice(selectionIndex - 1, 1);
+                yield this.plugin.saveSettings();
+                this.refreshPresets();
+            }
+        }));
+        let saveAsDefault = new obsidian.ButtonComponent(this.presetsDivContent);
+        saveAsDefault
+            .setButtonText('Save as Default')
+            .setTooltip('Save the current view as the default one.')
+            .onClick(() => __awaiter(this, void 0, void 0, function* () {
+            this.settings.defaultState = Object.assign(Object.assign({}, this.getCurrentState()), { name: 'Default' });
+            yield this.plugin.saveSettings();
+            this.presetsBox.setValue('0');
+        }));
+    }
+    invalidateActivePreset() {
+        if (!areStatesEqual(this.getCurrentState(), this.lastSelectedPreset)) {
+            this.presetsBox.setValue('-1');
+        }
+    }
+}
+
 class MapView extends obsidian.ItemView {
     constructor(leaf, settings, plugin) {
         super(leaf);
@@ -17827,30 +18213,15 @@ class MapView extends obsidian.ItemView {
             }
         };
         this.isOpen = false;
-        this.onAfterOpen = null;
-        this.updateMapSources = () => { };
         this.navigation = true;
         this.settings = settings;
         this.plugin = plugin;
         // Create the default state by the configuration
-        this.defaultState = {
-            mapZoom: this.settings.defaultZoom || DEFAULT_ZOOM,
-            mapCenter: this.settings.defaultMapCenter || DEFAULT_CENTER,
-            tags: this.settings.defaultTags || DEFAULT_TAGS,
-            version: 0
-        };
+        this.defaultState = this.settings.defaultState;
         this.setState = (state, result) => __awaiter(this, void 0, void 0, function* () {
-            if (state) {
-                if (!state.version) {
-                    // We give the given state priority by setting a high version
-                    state.version = this.plugin.highestVersionSeen + 1;
-                }
-                if (!state.mapCenter || !state.mapZoom) {
-                    state.mapCenter = this.defaultState.mapCenter;
-                    state.mapZoom = this.defaultState.mapZoom;
-                }
-                yield this.updateMapToState(state, false);
-            }
+            yield this.setViewState(state, true, false);
+            if (this.display.controls)
+                this.display.controls.tryToGuessPreset();
         });
         this.getState = () => {
             return this.state;
@@ -17882,7 +18253,9 @@ class MapView extends obsidian.ItemView {
         return __awaiter(this, void 0, void 0, function* () {
             this.isOpen = true;
             this.state = this.defaultState;
-            this.display.controlsDiv = this.createControls();
+            this.display.controls = new ViewControls(this.contentEl, this.settings, this.app, this, this.plugin);
+            this.contentEl.style.padding = '0px 0px';
+            this.display.controls.createControls();
             this.display.mapDiv = createDiv({ cls: 'map' }, (el) => {
                 el.style.zIndex = '1';
                 el.style.width = '100%';
@@ -17897,108 +18270,6 @@ class MapView extends obsidian.ItemView {
             return _super.onOpen.call(this);
         });
     }
-    createControls() {
-        var _a, _b;
-        var that = this;
-        let controlsDiv = createDiv({
-            'cls': 'graph-controls'
-        });
-        let filtersDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
-        filtersDiv.innerHTML = `
-			<input id="filtersCollapsible" class="toggle" type="checkbox">
-			<label for="filtersCollapsible" class="lbl-toggle">Filters</label>
-			`;
-        const filtersButton = filtersDiv.getElementsByClassName('toggle')[0];
-        filtersButton.checked = this.settings.mapControls.filtersDisplayed;
-        filtersButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
-            this.settings.mapControls.filtersDisplayed = filtersButton.checked;
-            this.plugin.saveSettings();
-        });
-        let filtersContent = filtersDiv.createDiv({ 'cls': 'graph-control-content' });
-        this.display.tagsBox = new obsidian.TextComponent(filtersContent);
-        this.display.tagsBox.setPlaceholder('Tags, e.g. "#one,#two"');
-        this.display.tagsBox.onChange((tagsBox) => __awaiter(this, void 0, void 0, function* () {
-            that.state.tags = tagsBox.split(',').filter(t => t.length > 0);
-            yield this.updateMapToState(this.state, this.settings.autoZoom);
-        }));
-        let tagSuggestions = new obsidian.DropdownComponent(filtersContent);
-        tagSuggestions.setValue('Quick add tag');
-        tagSuggestions.addOption('', 'Quick add tag');
-        for (const tagName of this.getAllTagNames())
-            tagSuggestions.addOption(tagName, tagName);
-        tagSuggestions.onChange(value => {
-            let currentTags = this.display.tagsBox.getValue();
-            if (currentTags.indexOf(value) < 0) {
-                this.display.tagsBox.setValue(currentTags.split(',').filter(tag => tag.length > 0).concat([value]).join(','));
-            }
-            tagSuggestions.setValue('Quick add tag');
-            this.display.tagsBox.inputEl.focus();
-            this.display.tagsBox.onChanged();
-        });
-        let viewDiv = controlsDiv.createDiv({ 'cls': 'graph-control-div' });
-        viewDiv.innerHTML = `
-			<input id="viewCollapsible" class="toggle" type="checkbox">
-			<label for="viewCollapsible" class="lbl-toggle">View</label>
-			`;
-        const viewButton = viewDiv.getElementsByClassName('toggle')[0];
-        viewButton.checked = this.settings.mapControls.viewDisplayed;
-        viewButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
-            this.settings.mapControls.viewDisplayed = viewButton.checked;
-            this.plugin.saveSettings();
-        });
-        let viewDivContent = viewDiv.createDiv({ 'cls': 'graph-control-content' });
-        let mapSource = new obsidian.DropdownComponent(viewDivContent);
-        for (const [index, source] of this.settings.mapSources.entries()) {
-            mapSource.addOption(index.toString(), source.name);
-        }
-        this.updateMapSources();
-        mapSource.onChange((value) => __awaiter(this, void 0, void 0, function* () {
-            this.settings.chosenMapSource = parseInt(value);
-            yield this.plugin.saveSettings();
-            this.refreshMap();
-        }));
-        const chosenMapSource = (_a = this.settings.chosenMapSource) !== null && _a !== void 0 ? _a : 0;
-        mapSource.setValue(chosenMapSource.toString());
-        let sourceMode = new obsidian.DropdownComponent(viewDivContent);
-        sourceMode.addOptions({ auto: 'Auto', light: 'Light', dark: 'Dark' })
-            .setValue((_b = this.settings.chosenMapMode) !== null && _b !== void 0 ? _b : 'auto')
-            .onChange((value) => __awaiter(this, void 0, void 0, function* () {
-            this.settings.chosenMapMode = value;
-            yield this.plugin.saveSettings();
-            this.refreshMap();
-        }));
-        let goDefault = new obsidian.ButtonComponent(viewDivContent);
-        goDefault
-            .setButtonText('Reset')
-            .setTooltip('Reset the view to the defined default.')
-            .onClick(() => __awaiter(this, void 0, void 0, function* () {
-            let newState = {
-                mapZoom: this.settings.defaultZoom || DEFAULT_ZOOM,
-                mapCenter: this.settings.defaultMapCenter || DEFAULT_CENTER,
-                tags: this.settings.defaultTags || DEFAULT_TAGS,
-                version: this.state.version + 1
-            };
-            yield this.updateMapToState(newState, false);
-        }));
-        let fitButton = new obsidian.ButtonComponent(viewDivContent);
-        fitButton
-            .setButtonText('Fit')
-            .setTooltip('Set the map view to fit all currently-displayed markers.')
-            .onClick(() => this.autoFitMapToMarkers());
-        let setDefault = new obsidian.ButtonComponent(viewDivContent);
-        setDefault
-            .setButtonText('Set as Default')
-            .setTooltip('Set this view (map state & filters) as default.')
-            .onClick(() => __awaiter(this, void 0, void 0, function* () {
-            this.settings.defaultZoom = this.state.mapZoom;
-            this.settings.defaultMapCenter = this.state.mapCenter;
-            this.settings.defaultTags = this.state.tags;
-            yield this.plugin.saveSettings();
-        }));
-        this.contentEl.style.padding = '0px 0px';
-        this.contentEl.append(controlsDiv);
-        return controlsDiv;
-    }
     onClose() {
         this.isOpen = false;
         return super.onClose();
@@ -18006,33 +18277,28 @@ class MapView extends obsidian.ItemView {
     onResize() {
         this.display.map.invalidateSize();
     }
-    refreshMap() {
-        var _a, _b, _c, _d, _e, _f, _g;
+    setViewState(state, updateControls, considerAutoFit) {
         return __awaiter(this, void 0, void 0, function* () {
-            (_b = (_a = this.display) === null || _a === void 0 ? void 0 : _a.map) === null || _b === void 0 ? void 0 : _b.off();
-            (_d = (_c = this.display) === null || _c === void 0 ? void 0 : _c.map) === null || _d === void 0 ? void 0 : _d.remove();
-            (_f = (_e = this.display) === null || _e === void 0 ? void 0 : _e.markers) === null || _f === void 0 ? void 0 : _f.clear();
-            (_g = this.display) === null || _g === void 0 ? void 0 : _g.controlsDiv.remove();
-            this.display.controlsDiv = this.createControls();
-            this.createMap();
-            this.updateMapToState(this.state, false, true);
+            if (state) {
+                const newState = mergeStates(this.state, state);
+                this.updateTileLayerByState(newState);
+                yield this.updateMarkersToState(newState);
+                if (considerAutoFit && this.settings.autoZoom)
+                    yield this.autoFitMapToMarkers();
+                if (updateControls)
+                    this.display.controls.updateControlsToState();
+            }
         });
     }
-    createMap() {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function* () {
+    updateTileLayerByState(newState) {
+        if (this.display.tileLayer && this.state.chosenMapSource != newState.chosenMapSource) {
+            this.display.tileLayer.remove();
+            this.display.tileLayer = null;
+        }
+        this.state.chosenMapSource = newState.chosenMapSource;
+        if (!this.display.tileLayer) {
             const isDark = this.isDarkMode(this.settings);
-            this.display.map = new leafletSrc.Map(this.display.mapDiv, {
-                center: this.defaultState.mapCenter,
-                zoom: this.defaultState.mapZoom,
-                zoomControl: false,
-                worldCopyJump: true,
-                maxBoundsViscosity: 1.0
-            });
-            leafletSrc.control.zoom({
-                position: 'topright'
-            }).addTo(this.display.map);
-            const chosenMapSource = this.settings.mapSources[(_a = this.settings.chosenMapSource) !== null && _a !== void 0 ? _a : 0];
+            const chosenMapSource = this.settings.mapSources[this.state.chosenMapSource];
             const attribution = chosenMapSource.urlLight === DEFAULT_SETTINGS.mapSources[0].urlLight ?
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' : '';
             let revertMap = false;
@@ -18043,14 +18309,47 @@ class MapView extends obsidian.ItemView {
                 else
                     revertMap = true;
             }
-            this.display.map.addLayer(new leafletSrc.TileLayer(mapSourceUrl, {
+            const neededClassName = revertMap ? "dark-mode" : "";
+            this.display.tileLayer = new leafletSrc.TileLayer(mapSourceUrl, {
                 maxZoom: 20,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                 attribution: attribution,
-                className: revertMap ? "dark-mode" : ""
-            }));
+                className: neededClassName
+            });
+            this.display.map.addLayer(this.display.tileLayer);
+        }
+    }
+    refreshMap() {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        return __awaiter(this, void 0, void 0, function* () {
+            (_b = (_a = this.display) === null || _a === void 0 ? void 0 : _a.tileLayer) === null || _b === void 0 ? void 0 : _b.remove();
+            this.display.tileLayer = null;
+            (_d = (_c = this.display) === null || _c === void 0 ? void 0 : _c.map) === null || _d === void 0 ? void 0 : _d.off();
+            (_f = (_e = this.display) === null || _e === void 0 ? void 0 : _e.map) === null || _f === void 0 ? void 0 : _f.remove();
+            (_h = (_g = this.display) === null || _g === void 0 ? void 0 : _g.markers) === null || _h === void 0 ? void 0 : _h.clear();
+            (_l = (_k = (_j = this.display) === null || _j === void 0 ? void 0 : _j.controls) === null || _k === void 0 ? void 0 : _k.controlsDiv) === null || _l === void 0 ? void 0 : _l.remove();
+            (_m = this.display.controls) === null || _m === void 0 ? void 0 : _m.reload();
+            yield this.createMap();
+            this.updateMarkersToState(this.state, true);
+            this.display.controls.updateControlsToState();
+        });
+    }
+    createMap() {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            this.display.map = new leafletSrc.Map(this.display.mapDiv, {
+                center: this.defaultState.mapCenter,
+                zoom: this.defaultState.mapZoom,
+                zoomControl: false,
+                worldCopyJump: true,
+                maxBoundsViscosity: 1.0
+            });
+            leafletSrc.control.zoom({
+                position: 'topright'
+            }).addTo(this.display.map);
+            this.updateTileLayerByState(this.state);
             this.display.clusterGroup = new leafletSrc.MarkerClusterGroup({
-                maxClusterRadius: (_b = this.settings.maxClusterRadiusPixels) !== null && _b !== void 0 ? _b : DEFAULT_SETTINGS.maxClusterRadiusPixels
+                maxClusterRadius: (_a = this.settings.maxClusterRadiusPixels) !== null && _a !== void 0 ? _a : DEFAULT_SETTINGS.maxClusterRadiusPixels
             });
             this.display.map.addLayer(this.display.clusterGroup);
             const suggestor = new LocationSuggest(this.app, this.settings);
@@ -18064,10 +18363,14 @@ class MapView extends obsidian.ItemView {
             });
             this.display.map.addControl(searchControl);
             this.display.map.on('zoomend', (event) => {
+                var _a, _b;
                 this.state.mapZoom = this.display.map.getZoom();
+                (_b = (_a = this.display) === null || _a === void 0 ? void 0 : _a.controls) === null || _b === void 0 ? void 0 : _b.invalidateActivePreset();
             });
             this.display.map.on('moveend', (event) => {
+                var _a, _b;
                 this.state.mapCenter = this.display.map.getCenter();
+                (_b = (_a = this.display) === null || _a === void 0 ? void 0 : _a.controls) === null || _b === void 0 ? void 0 : _b.invalidateActivePreset();
             });
             // --- Work in progress ---
             // this.display.clusterGroup.on('clustermouseover', cluster => {
@@ -18135,30 +18438,20 @@ class MapView extends obsidian.ItemView {
     }
     // Updates the map to the given state and then sets the state accordingly, but only if the given state version
     // is not lower than the current state version (so concurrent async updates always keep the latest one)
-    updateMapToState(state, autoFit = false, force = false) {
+    updateMarkersToState(state, force = false) {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.settings.debug)
-                console.time('updateMapToState');
+                console.time('updateMarkersToState');
             const files = this.getFileListByQuery(state.tags);
             let newMarkers = yield buildMarkers(files, this.settings, this.app);
-            if (state.version < this.state.version && !force) {
-                // If the state we were asked to update is old (e.g. because while we were building markers a newer instance
-                // of the method was called), cancel the update
-                return;
-            }
             // --- BEYOND THIS POINT NOTHING SHOULD BE ASYNC ---
             // Saying it again: do not use 'await' below this line!
             this.state = state;
-            this.plugin.highestVersionSeen = Math.max(this.plugin.highestVersionSeen, this.state.version);
             this.updateMapMarkers(newMarkers);
-            this.state.tags = this.state.tags || [];
-            this.display.tagsBox.setValue(this.state.tags.filter(tag => tag.length > 0).join(','));
             if (this.state.mapCenter && this.state.mapZoom)
                 this.display.map.setView(this.state.mapCenter, this.state.mapZoom);
-            if (autoFit)
-                this.autoFitMapToMarkers();
             if (this.settings.debug)
-                console.timeEnd('updateMapToState');
+                console.timeEnd('updateMarkersToState');
         });
     }
     getFileListByQuery(tags) {
@@ -18248,7 +18541,6 @@ class MapView extends obsidian.ItemView {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.display.markers.size > 0) {
                 const locations = Array.from(this.display.markers.values()).map(fileMarker => fileMarker.location);
-                console.log(`Auto fit by state:`, this.state);
                 this.display.map.fitBounds(leafletSrc.latLngBounds(locations));
             }
         });
@@ -18288,7 +18580,7 @@ class MapView extends obsidian.ItemView {
                 }
             }
             yield leafToUse.openFile(file);
-            const editor = yield this.getEditor(leafToUse);
+            const editor = yield getEditor(this.app, leafToUse);
             if (editor && editorAction)
                 yield editorAction(editor);
         });
@@ -18296,29 +18588,6 @@ class MapView extends obsidian.ItemView {
     goToMarker(marker, useCtrlKeyBehavior, highlight) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.goToFile(marker.file, useCtrlKeyBehavior, (editor) => __awaiter(this, void 0, void 0, function* () { yield goToEditorLocation(editor, marker.fileLocation, highlight); }));
-        });
-    }
-    getAllTagNames() {
-        let tags = [];
-        const allFiles = this.app.vault.getFiles();
-        for (const file of allFiles) {
-            const fileCache = this.app.metadataCache.getFileCache(file);
-            if (fileCache && fileCache.tags) {
-                const fileTagNames = obsidian.getAllTags(fileCache) || [];
-                tags = tags.concat(fileTagNames.filter(tagName => tags.indexOf(tagName) < 0));
-            }
-        }
-        tags = tags.sort();
-        return tags;
-    }
-    getEditor(leafToUse) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let view = leafToUse && leafToUse.view instanceof obsidian.MarkdownView ?
-                leafToUse.view :
-                this.app.workspace.getActiveViewOfType(obsidian.MarkdownView);
-            if (view)
-                return view.editor;
-            return null;
         });
     }
     updateMarkersWithRelationToFile(fileRemoved, fileAddedOrChanged, skipMetadata) {
@@ -18417,7 +18686,7 @@ class SettingsTab extends obsidian.PluginSettingTab {
         });
         new obsidian.Setting(containerEl)
             .setName('New note name format')
-            .setDesc('Date/times in the format can be wrapped in {{date:...}}, e.g. "note-{{date:YYYY-MM-DD}}".')
+            .setDesc('Date/times in the format can be wrapped in {{date:...}}, e.g. "note-{{date:YYYY-MM-DD}}". Search queries can be added with {{query}}.')
             .addText(component => {
             component
                 .setValue(this.plugin.settings.newNoteNameFormat || DEFAULT_SETTINGS.newNoteNameFormat)
@@ -18561,9 +18830,10 @@ class SettingsTab extends obsidian.PluginSettingTab {
         if (this.refreshPluginOnHide) {
             const mapViews = this.app.workspace.getLeavesOfType(MAP_VIEW_NAME);
             for (const leaf of mapViews) {
-                const mapView = leaf.view;
-                mapView.refreshMap();
-                mapView.updateMapSources();
+                if (leaf.view) {
+                    const mapView = leaf.view;
+                    mapView.refreshMap();
+                }
             }
         }
     }
@@ -18873,6 +19143,106 @@ class SettingsTab extends obsidian.PluginSettingTab {
     }
 }
 
+class NewNoteDialog extends obsidian.SuggestModal {
+    constructor(app, settings, dialogAction = 'newNote', editor = null) {
+        super(app);
+        this.lastSearchTime = 0;
+        this.delayInMs = 250;
+        this.lastSearch = '';
+        this.lastSearchResults = [];
+        this.dialogAction = 'newNote';
+        this.editor = null;
+        this.settings = settings;
+        this.suggestor = new LocationSuggest(this.app, this.settings);
+        this.urlConvertor = new UrlConvertor(this.app, this.settings);
+        this.dialogAction = dialogAction;
+        this.editor = editor;
+        this.setPlaceholder('Type a search query or paste a supported URL');
+        this.setInstructions([{ command: 'enter', purpose: 'to use' }]);
+    }
+    getSuggestions(query) {
+        let result = [];
+        const urlResult = this.parseLocationAsUrl(query);
+        if (urlResult)
+            result.push(urlResult);
+        if (query == this.lastSearch) {
+            result = result.concat(this.lastSearchResults);
+        }
+        this.getSearchResultsWithDelay(query);
+        return result;
+    }
+    renderSuggestion(value, el) {
+        el.setText(value.name);
+    }
+    onChooseSuggestion(value, evt) {
+        if (this.dialogAction == 'newNote')
+            this.newNote(value.location, evt, value.name);
+        else if (this.dialogAction == 'addToNote')
+            this.addToNote(value.location, evt, value.name);
+    }
+    newNote(location, ev, query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const locationString = `${location.lat},${location.lng}`;
+            const newFileName = formatWithTemplates(this.settings.newNoteNameFormat, query);
+            const file = yield newNote(this.app, 'singleLocation', this.settings.newNotePath, newFileName, locationString, this.settings.newNoteTemplate);
+            // If there is an open map view, use it to decide how and where to open the file.
+            // Otherwise, open the file from the active leaf
+            const mapView = findOpenMapView(this.app);
+            if (mapView) {
+                mapView.goToFile(file, ev.ctrlKey, handleNewNoteCursorMarker);
+            }
+            else {
+                const leaf = this.app.workspace.activeLeaf;
+                yield leaf.openFile(file);
+                const editor = yield getEditor(this.app);
+                if (editor)
+                    yield handleNewNoteCursorMarker(editor);
+            }
+        });
+    }
+    addToNote(location, ev, query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const locationString = `[${location.lat},${location.lng}]`;
+            verifyOrAddFrontMatter(this.editor, 'location', locationString);
+        });
+    }
+    getSearchResultsWithDelay(query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // TODO merge this with LocationSuggest
+            if (query === this.lastSearch || query.length < 3)
+                return;
+            const timestamp = Date.now();
+            this.lastSearchTime = timestamp;
+            const Sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            yield Sleep(this.delayInMs);
+            if (this.lastSearchTime != timestamp) {
+                // Search is canceled by a newer search
+                return null;
+            }
+            // After the sleep our search is still the last -- so the user stopped and we can go on
+            const results = yield this.suggestor.searchProvider.search({ query: query });
+            const suggestions = results.map(result => ({
+                name: result.label,
+                location: new leafletSrc.LatLng(result.y, result.x),
+                type: 'searchResult'
+            }));
+            this.lastSearchResults = suggestions;
+            this.lastSearch = query;
+            this.updateSuggestions();
+            return suggestions;
+        });
+    }
+    parseLocationAsUrl(query) {
+        const result = this.urlConvertor.parseLocationFromUrl(query);
+        if (result)
+            return {
+                name: `Parsed from ${result.ruleName}: ${result.location.lat}, ${result.location.lng}`,
+                location: result.location,
+                type: 'url'
+            };
+    }
+}
+
 class MapViewPlugin extends obsidian.Plugin {
     constructor() {
         super(...arguments);
@@ -18899,6 +19269,10 @@ class MapViewPlugin extends obsidian.Plugin {
                 yield this.saveSettings();
                 new obsidian.Notice("Map View: legacy tiles URL was converted to the new format");
             }
+            if (convertLegacyDefaultState(this.settings)) {
+                yield this.saveSettings();
+                new obsidian.Notice("Map View: legacy default state was converted to the new format");
+            }
             this.addCommand({
                 id: 'open-map-view',
                 name: 'Open Map View',
@@ -18917,11 +19291,27 @@ class MapViewPlugin extends obsidian.Plugin {
             });
             this.addCommand({
                 id: 'insert-geolink',
-                name: 'Insert Geolocation',
+                name: 'Add inline geolocation link',
                 editorCallback: (editor, view) => {
                     const positionBeforeInsert = editor.getCursor();
                     editor.replaceSelection('[](geo:)');
                     editor.setCursor({ line: positionBeforeInsert.line, ch: positionBeforeInsert.ch + 1 });
+                }
+            });
+            this.addCommand({
+                id: 'new-geolocation-note',
+                name: 'New geolocation note',
+                callback: () => {
+                    const dialog = new NewNoteDialog(this.app, this.settings);
+                    dialog.open();
+                }
+            });
+            this.addCommand({
+                id: 'add-frontmatter-geolocation',
+                name: 'Add geolocation (front matter) to current note',
+                editorCallback: (editor, view) => {
+                    const dialog = new NewNoteDialog(this.app, this.settings, 'addToNote', editor);
+                    dialog.open();
                 }
             });
             this.addSettingTab(new SettingsTab(this.app, this));
@@ -18941,6 +19331,19 @@ class MapViewPlugin extends obsidian.Plugin {
                             });
                         });
                         populateOpenInItems(menu, location, this.settings);
+                    }
+                    else {
+                        if (leaf && leaf.view instanceof obsidian.MarkdownView) {
+                            const editor = leaf.view.editor;
+                            menu.addItem((item) => {
+                                item.setTitle('Add geolocation (front matter)');
+                                item.setIcon('globe');
+                                item.onClick((evt) => __awaiter(this, void 0, void 0, function* () {
+                                    const dialog = new NewNoteDialog(this.app, this.settings, 'addToNote', editor);
+                                    dialog.open();
+                                }));
+                            });
+                        }
                     }
                 }
             });
@@ -18991,6 +19394,11 @@ class MapViewPlugin extends obsidian.Plugin {
     }
     openMapWithLocation(location, ctrlKey) {
         return __awaiter(this, void 0, void 0, function* () {
+            yield this.openMapWithState({ mapCenter: location, mapZoom: this.settings.zoomOnGoFromNote }, ctrlKey);
+        });
+    }
+    openMapWithState(state, ctrlKey) {
+        return __awaiter(this, void 0, void 0, function* () {
             // Find the best candidate for a leaf to open the map view on.
             // If there's an open map view, use that, otherwise use the current leaf.
             // If Ctrl is pressed, override that behavior and always use the current leaf.
@@ -19002,14 +19410,7 @@ class MapViewPlugin extends obsidian.Plugin {
                 chosenLeaf = this.app.workspace.getLeaf();
             if (!chosenLeaf)
                 chosenLeaf = this.app.workspace.activeLeaf;
-            yield chosenLeaf.setViewState({
-                type: MAP_VIEW_NAME,
-                state: {
-                    version: this.highestVersionSeen + 1,
-                    mapCenter: location,
-                    mapZoom: this.settings.zoomOnGoFromNote
-                }
-            });
+            yield chosenLeaf.setViewState({ type: MAP_VIEW_NAME, state: state });
         });
     }
     getLocationOnEditorLine(editor, view) {
