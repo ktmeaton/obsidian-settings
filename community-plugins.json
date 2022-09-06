@@ -1,25 +1,19 @@
 [
   "calendar",
   "dataview",
-  "obsidian-day-planner",
   "obsidian-mind-map",
   "shortcuts-extender",
-  "sliding-panes-obsidian",
   "tag-wrangler",
   "obsidian-plantuml",
   "obsidian-admonition",
   "meld-encrypt",
-  "obsidian-enhancing-mindmap",
-  "obsidian-excalidraw-plugin",
-  "obsidian-map-view",
   "obsidian42-brat",
   "obsidian-emoji-toolbar",
   "better-word-count",
-  "obsidian-daily-stats",
   "obsidian-advanced-slides",
   "table-editor-obsidian",
   "csv-obsidian",
-  "obsidian-csv-table",
   "periodic-notes",
-  "obsidian-full-calendar"
+  "sliding-panes-obsidian",
+  "obsidian-reminder-plugin"
 ]

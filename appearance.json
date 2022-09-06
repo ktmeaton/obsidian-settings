@@ -1,6 +1,9 @@
 {
-  "theme": "moonstone",
+  "theme": "obsidian",
   "translucency": false,
-  "cssTheme": "Deep Work",
-  "baseFontSize": 15
+  "cssTheme": "Obsidian Nord",
+  "baseFontSize": 14,
+  "enabledCssSnippets": [
+    "obsidian"
+  ]
 }

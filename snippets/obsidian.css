@@ -1,0 +1,19 @@
+th {
+    text-align: center;
+}
+
+.theme-light .markdown-preview-view th {
+    color: white;
+}
+
+/* Set table header links to white for contrast against background*/
+.theme-light .markdown-preview-view .internal-link {
+    font-weight: 700;
+}
+
+
+/* Set table header links to white for contrast against background*/
+.theme-light .markdown-preview-view th .internal-link {
+    font-weight: 700;
+    color: white  !important;
+}
