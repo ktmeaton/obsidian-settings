@@ -6,32 +6,17 @@
   "hideUnresolved": false,
   "showOrphans": true,
   "collapse-color-groups": false,
-  "colorGroups": [
-    {
-      "query": "Meeting",
-      "color": {
-        "a": 1,
-        "rgb": 16711680
-      }
-    },
-    {
-      "query": "type: Project",
-      "color": {
-        "a": 1,
-        "rgb": 16731944
-      }
-    }
-  ],
-  "collapse-display": true,
+  "colorGroups": [],
+  "collapse-display": false,
   "showArrow": false,
   "textFadeMultiplier": -1.9,
   "nodeSizeMultiplier": 2.86410256410256,
   "lineSizeMultiplier": 1.94882352941176,
-  "collapse-forces": false,
+  "collapse-forces": true,
   "centerStrength": 0.585714285714286,
   "repelStrength": 13.1623931623932,
   "linkStrength": 0.64957264957265,
   "linkDistance": 235,
-  "scale": 0.2713866918495579,
+  "scale": 0.07643695230614424,
   "close": false
 }

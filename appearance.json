@@ -1,9 +1,11 @@
 {
-  "theme": "obsidian",
+  "theme": "moonstone",
   "translucency": false,
-  "cssTheme": "Obsidian Nord",
-  "baseFontSize": 14,
-  "enabledCssSnippets": [
-    "obsidian"
-  ]
+  "cssTheme": "Atom",
+  "baseFontSize": 16,
+  "enabledCssSnippets": [],
+  "accentColor": "",
+  "textFontFamily": "Arial",
+  "interfaceFontFamily": "Arial",
+  "monospaceFontFamily": "Calibri"
 }

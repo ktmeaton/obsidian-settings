@@ -65,7 +65,7 @@
   ],
   "pdfExportSettings": {
     "pageSize": "Letter",
-    "landscape": true,
+    "landscape": false,
     "margin": "0",
     "downscalePercent": 100
   },
@@ -74,5 +74,7 @@
   "legacyEditor": false,
   "livePreview": false,
   "readableLineLength": true,
-  "showLineNumber": false
+  "showLineNumber": false,
+  "showInlineTitle": false,
+  "showUnsupportedFiles": true
 }
