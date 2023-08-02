@@ -6004,7 +6004,7 @@ function getContent(element2, names) {
       const data = getElementByName(element2, elementName);
       if (data) {
         if (data.nodeName === elementName) {
-          const tmp = data.getAttr(attr2);
+          const tmp = data.getAttribute(attr2);
           if (tmp.length > 0) {
             value = tmp;
           }
@@ -6098,7 +6098,7 @@ function getFeedItems(feed) {
         item.created = false;
         item.language = language;
         item.hash = new import_ts_md5.Md5().appendStr(item.title).appendStr(item.folder).appendStr(item.link).end();
-        if (!item.image && feed.url.contains("youtube.com/feeds")) {
+        if (!item.image && feed.url.includes("youtube.com/feeds")) {
           item.image = "https://i3.ytimg.com/vi/" + item.id.split(":")[2] + "/hqdefault.jpg";
         }
         items.push(item);
@@ -6276,6 +6276,8 @@ var BaseModal = class extends import_obsidian3.Modal {
 
 // src/l10n/locales/en.ts
 var en_default = {
+  testingValue: "",
+  testingInserts: "",
   RSS_Reader: "RSS Reader",
   RSS_Feeds: "RSS Feeds",
   open: "Open",
@@ -6328,7 +6330,7 @@ var en_default = {
   invalid_name: "you need to specify a name",
   invalid_url: "this url is not valid",
   invalid_feed: "This feed does not have any entries",
-  filter_tags: "all articles with tags",
+  filter_tags: "All articles with tags",
   filter_unread: "All unread articles(from folders)",
   filter_read: "All read articles(from folders)",
   filter_favorites: "Favorites(from folders)",
@@ -6351,6 +6353,7 @@ var en_default = {
   from_folders: "from folders: ",
   from_feeds: "from feeds: ",
   with_tags: "with tags: ",
+  no_feed_with_name: "There is no feed with this name",
   invalid_tag: "This is not a valid tag",
   note_exists: "there is already a note with that name",
   invalid_filename: "that filename is not valid",
@@ -6398,8 +6401,8 @@ var en_default = {
   default_filename: "Template for filename",
   default_filename_help: "All variables from the paste template are available",
   cleanup: "Cleanup articles",
-  cleanup_help: "Removes all entries which fit the criteria specified below.",
-  cleanup_help2: "Keep in mind that all articles that still exist in the feed will reappear on the next refresh",
+  cleanup_help: "Removes entries which fit the criteria specified below.",
+  cleanup_help2: "Keep in mind that articles that still exist in the feed will reappear on the next refresh",
   perform_cleanup: "Perform cleanup",
   all: "all",
   from_feed: "from feed",
@@ -6520,6 +6523,7 @@ var de_default = {
   from_folders: "Aus Ordnern: ",
   from_feeds: "Aus Feeds: ",
   with_tags: "Mit Tags: ",
+  no_feed_with_name: "Es existiert kein Feed mit diesem Namen",
   invalid_tag: "Dieser Tag ist nicht g\xFCltig",
   note_exists: "Es existiert bereits eine Notiz mit diesem Namen",
   invalid_filename: "Der Dateiname ist nicht g\xFCltig",
@@ -6764,12 +6768,19 @@ var zh_default = {
   loading: "\u6B63\u5728\u52A0\u8F7D"
 };
 
+// src/l10n/locales/test.ts
+var test_default = {
+  "testingValue": "Hello World",
+  testingInserts: "Hello %1 %2"
+};
+
 // src/l10n/locale.ts
-var locale = window.moment.locale();
+var locale = window.moment ? window.moment.locale() : "test";
 var localeMap = {
   en: en_default,
   de: de_default,
-  "zh-cn": zh_default
+  "zh-cn": zh_default,
+  test: test_default
 };
 var userLocale = localeMap[locale];
 function t(str, ...inserts) {
@@ -8755,7 +8766,7 @@ var TagModal = class extends BaseModal {
           this.tags.push(value);
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+        button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
           this.tags = this.tags.filter((e) => e !== this.tags[tag]);
           this.display();
         });
@@ -8774,7 +8785,7 @@ var TagModal = class extends BaseModal {
         tagValue = value;
       }));
     })).addExtraButton((button) => {
-      button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+      button.setTooltip(t("add")).setIcon("plus").onClick(() => {
         if (!tagValue.match(TAG_REGEX) || tagValue.match(NUMBER_REGEX) || tagValue.contains(" ") || tagValue.contains("#")) {
           this.setValidationError(tagComponent, t("invalid_tag"));
           return;
@@ -13268,7 +13279,7 @@ var FilteredFolderModal = class extends BaseModal {
             this.filterFolders.push(value);
           }));
         })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
             this.filterFolders = this.filterFolders.filter((e) => e !== this.filterFolders[folder]);
             this.display();
           });
@@ -13281,7 +13292,7 @@ var FilteredFolderModal = class extends BaseModal {
           folderValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
           this.filterFolders.push(folderValue);
           this.display();
         });
@@ -13297,7 +13308,7 @@ var FilteredFolderModal = class extends BaseModal {
             this.ignoreFolders.push(value);
           }));
         })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
             this.ignoreFolders = this.ignoreFolders.filter((e) => e !== this.ignoreFolders[folder]);
             this.display();
           });
@@ -13310,7 +13321,7 @@ var FilteredFolderModal = class extends BaseModal {
           folderIgnoreValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
           this.ignoreFolders.push(folderIgnoreValue);
           this.display();
         });
@@ -13325,15 +13336,10 @@ var FilteredFolderModal = class extends BaseModal {
         return this.filterFolders.contains(feed.folder);
       }).map((feed) => feed.name);
       for (const feed in this.filterFeeds) {
-        new import_obsidian17.Setting(feedsDiv).addSearch((search) => __async(this, null, function* () {
-          new ArraySuggest(this.app, search.inputEl, new Set(feeds));
-          search.setValue(this.filterFeeds[feed]).onChange((value) => __async(this, null, function* () {
-            this.removeValidationError(search);
-            this.filterFeeds = this.filterFeeds.filter((e) => e !== this.filterFeeds[feed]);
-            this.filterFeeds.push(value);
-          }));
-        })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+        new import_obsidian17.Setting(feedsDiv).addText((text2) => {
+          text2.setDisabled(true).setValue(this.filterFeeds[feed]);
+        }).addExtraButton((button) => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
             this.filterFeeds = this.filterFeeds.filter((e) => e !== this.filterFeeds[feed]);
             this.display();
           });
@@ -13343,27 +13349,30 @@ var FilteredFolderModal = class extends BaseModal {
       const newFeed = new import_obsidian17.Setting(feedsDiv).addSearch((search) => __async(this, null, function* () {
         new ArraySuggest(this.app, search.inputEl, new Set(feeds));
         search.onChange((value) => __async(this, null, function* () {
+          const feeds2 = this.plugin.settings.feeds.filter((feed) => feed.name === feedIgnoreValue).length;
+          if (feeds2 !== 1) {
+            this.setValidationError(search, t("no_feed_with_name"));
+            return;
+          }
           feedValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
+          const feeds2 = this.plugin.settings.feeds.filter((feed) => feed.name === feedIgnoreValue).length;
+          if (feeds2 !== 1)
+            return;
           this.filterFeeds.push(feedValue);
           this.display();
         });
       });
       newFeed.controlEl.addClass("rss-setting-input");
       feedsDiv.createEl("p", { text: t("filter_feed_ignore_help") });
-      for (const folder in this.ignoreFeeds) {
-        new import_obsidian17.Setting(feedsDiv).addSearch((search) => __async(this, null, function* () {
-          new ArraySuggest(this.app, search.inputEl, new Set(feeds));
-          search.setValue(this.ignoreFeeds[folder]).onChange((value) => __async(this, null, function* () {
-            this.removeValidationError(search);
-            this.ignoreFeeds = this.ignoreFeeds.filter((e) => e !== this.ignoreFeeds[folder]);
-            this.ignoreFeeds.push(value);
-          }));
-        })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
-            this.ignoreFeeds = this.ignoreFeeds.filter((e) => e !== this.ignoreFeeds[folder]);
+      for (const feed in this.ignoreFeeds) {
+        new import_obsidian17.Setting(feedsDiv).addText((text2) => {
+          text2.setDisabled(true).setValue(this.ignoreFeeds[feed]);
+        }).addExtraButton((button) => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
+            this.ignoreFeeds = this.ignoreFeeds.filter((e) => e !== this.ignoreFeeds[feed]);
             this.display();
           });
         });
@@ -13372,10 +13381,18 @@ var FilteredFolderModal = class extends BaseModal {
       const newIgnoreFeed = new import_obsidian17.Setting(feedsDiv).addSearch((search) => __async(this, null, function* () {
         new ArraySuggest(this.app, search.inputEl, new Set(feeds));
         search.onChange((value) => __async(this, null, function* () {
+          const feeds2 = this.plugin.settings.feeds.filter((feed) => feed.name === feedIgnoreValue).length;
+          if (feeds2 !== 1) {
+            this.setValidationError(search, t("no_feed_with_name"));
+            return;
+          }
           feedIgnoreValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
+          const feeds2 = this.plugin.settings.feeds.filter((feed) => feed.name === feedIgnoreValue).length;
+          if (feeds2 !== 1)
+            return;
           this.ignoreFeeds.push(feedIgnoreValue);
           this.display();
         });
@@ -13385,19 +13402,10 @@ var FilteredFolderModal = class extends BaseModal {
       tagDiv.createEl("h2", { text: t("tags") });
       tagDiv.createEl("p", { text: t("filter_tags_help") });
       for (const tag in this.filterTags) {
-        new import_obsidian17.Setting(tagDiv).addSearch((search) => __async(this, null, function* () {
-          new ArraySuggest(this.app, search.inputEl, get_store_value(tagsStore));
-          search.setValue(this.filterTags[tag]).onChange((value) => __async(this, null, function* () {
-            this.removeValidationError(search);
-            if (!value.match(TAG_REGEX) || value.match(NUMBER_REGEX) || value.contains(" ") || value.contains("#")) {
-              this.setValidationError(search, t("invalid_tag"));
-              return;
-            }
-            this.filterTags = this.filterTags.filter((e) => e !== this.filterTags[tag]);
-            this.filterTags.push(value);
-          }));
-        })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+        new import_obsidian17.Setting(tagDiv).addText((text2) => {
+          text2.setDisabled(true).setValue(this.filterTags[tag]);
+        }).addExtraButton((button) => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
             this.filterTags = this.filterTags.filter((e) => e !== this.filterTags[tag]);
             this.display();
           });
@@ -13416,7 +13424,7 @@ var FilteredFolderModal = class extends BaseModal {
           tagValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
           if (!tagValue.match(TAG_REGEX) || tagValue.match(NUMBER_REGEX) || tagValue.contains(" ") || tagValue.contains("#")) {
             this.setValidationError(tagComponent, t("invalid_tag"));
             return;
@@ -13440,7 +13448,7 @@ var FilteredFolderModal = class extends BaseModal {
             this.ignoreTags.push(value);
           }));
         })).addExtraButton((button) => {
-          button.setTooltip(t("delete")).setIcon("feather-trash").onClick(() => {
+          button.setTooltip(t("delete")).setIcon("trash").onClick(() => {
             this.ignoreTags = this.ignoreTags.filter((e) => e !== this.ignoreTags[tag]);
             this.display();
           });
@@ -13459,7 +13467,7 @@ var FilteredFolderModal = class extends BaseModal {
           ignoreTagValue = value;
         }));
       })).addExtraButton((button) => {
-        button.setTooltip(t("add")).setIcon("feather-plus").onClick(() => {
+        button.setTooltip(t("add")).setIcon("plus").onClick(() => {
           if (!ignoreTagValue.match(TAG_REGEX) || ignoreTagValue.match(NUMBER_REGEX) || ignoreTagValue.contains(" ") || ignoreTagValue.contains("#")) {
             this.setValidationError(ignoreTagComponent, t("invalid_tag"));
             return;
@@ -13745,7 +13753,7 @@ var CleanupModal = class extends BaseModal {
   constructor(plugin) {
     super(plugin.app);
     this.tag = "";
-    this.feed = "all-option-id";
+    this.feed = "wallabag.xml-option-id";
     this.plugin = plugin;
   }
   onOpen() {
@@ -13795,7 +13803,7 @@ var CleanupModal = class extends BaseModal {
       }).controlEl.addClass("rss-setting-input");
       older_than_setting.inputEl.setAttr("onkeypress", "return event.charCode >= 48 && event.charCode <= 57");
       new import_obsidian21.Setting(contentEl).setName(t("from_feed")).addDropdown((dropdown) => {
-        dropdown.addOption("all-option-id", t("all"));
+        dropdown.addOption("wallabag.xml-option-id", t("all"));
         const sorted = (0, import_lodash.default)((0, import_lodash2.default)(this.plugin.settings.feeds, "folder"), function(o) {
           return o[0].folder;
         });
@@ -13834,7 +13842,7 @@ var CleanupModal = class extends BaseModal {
               if (item !== void 0) {
                 let toRemove = 0;
                 if (item.pubDate === void 0 || (0, import_obsidian21.moment)(item.pubDate).isBefore(date)) {
-                  if (this.feed === "all-option-id" || this.feed === item.folder + "-" + item.feed) {
+                  if (this.feed === "wallabag.xml-option-id" || this.feed === item.folder + "-" + item.feed) {
                     if (this.read && item.read || !this.read && !item.read || this.read && !item.read) {
                       toRemove++;
                     }
@@ -14312,11 +14320,11 @@ function displayFilterSettings(plugin, containerEl) {
       const folders = filter.filterFolders.join(",");
       message += "; " + t("from_folders") + folders;
     }
-    if (filter.filterFeeds.length > 0) {
+    if (filter.filterFeeds !== void 0 && filter.filterFeeds.length > 0) {
       const feeds = filter.filterFeeds.join(",");
       message += "; " + t("from_feeds") + feeds;
     }
-    if (filter.filterTags.length > 0) {
+    if (filter.filterTags !== void 0 && filter.filterTags.length > 0) {
       const tags = filter.filterTags.join(",");
       message += "; " + t("with_tags") + tags;
     }

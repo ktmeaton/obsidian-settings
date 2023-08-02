@@ -1,8 +1,8 @@
 {
-  "theme": "moonstone",
+  "theme": "obsidian",
   "translucency": false,
   "cssTheme": "Atom",
-  "baseFontSize": 16,
+  "baseFontSize": 17,
   "enabledCssSnippets": [],
   "accentColor": "",
   "textFontFamily": "Arial",
